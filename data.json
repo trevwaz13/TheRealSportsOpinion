@@ -1,160 +1,482 @@
 {
   "season": 2025,
-  "week": 22,
-  "passers": [
-    {
-      "name": "Matthew Stafford",
-      "team": "LA",
-      "yards": 5643
-    },
-    {
-      "name": "Drake Maye",
-      "team": "NE",
-      "yards": 5222
-    },
-    {
-      "name": "Sam Darnold",
-      "team": "SEA",
-      "yards": 4720
-    },
-    {
-      "name": "Jared Goff",
-      "team": "DET",
-      "yards": 4564
-    },
-    {
-      "name": "Caleb Williams",
-      "team": "CHI",
-      "yards": 4560
-    },
-    {
-      "name": "Dak Prescott",
-      "team": "DAL",
-      "yards": 4552
-    },
-    {
-      "name": "Josh Allen",
-      "team": "BUF",
-      "yards": 4224
-    },
-    {
-      "name": "Trevor Lawrence",
-      "team": "JAX",
-      "yards": 4214
-    },
-    {
-      "name": "Bo Nix",
-      "team": "DEN",
-      "yards": 4210
-    },
-    {
-      "name": "Justin Herbert",
-      "team": "LAC",
-      "yards": 3886
-    }
-  ],
-  "rushers": [
-    {
-      "name": "James Cook",
-      "team": "BUF",
-      "yards": 1784
-    },
-    {
-      "name": "Derrick Henry",
-      "team": "BAL",
-      "yards": 1595
-    },
-    {
-      "name": "Jonathan Taylor",
-      "team": "IND",
-      "yards": 1585
-    },
-    {
-      "name": "Bijan Robinson",
-      "team": "ATL",
-      "yards": 1478
-    },
-    {
-      "name": "Kyren Williams",
-      "team": "LA",
-      "yards": 1435
-    },
-    {
-      "name": "De'Von Achane",
-      "team": "MIA",
-      "yards": 1350
-    },
-    {
-      "name": "Kenneth Walker III",
-      "team": "SEA",
-      "yards": 1340
-    },
-    {
-      "name": "Christian McCaffrey",
-      "team": "SF",
-      "yards": 1285
-    },
-    {
-      "name": "Saquon Barkley",
-      "team": "PHI",
-      "yards": 1246
-    },
-    {
-      "name": "Jahmyr Gibbs",
-      "team": "DET",
-      "yards": 1223
-    }
-  ],
-  "receivers": [
-    {
-      "name": "Puka Nacua",
-      "team": "LA",
-      "yards": 2047
-    },
-    {
-      "name": "Jaxon Smith-Njigba",
-      "team": "SEA",
-      "yards": 1992
-    },
-    {
-      "name": "George Pickens",
-      "team": "DAL",
-      "yards": 1429
-    },
-    {
-      "name": "Ja'Marr Chase",
-      "team": "CIN",
-      "yards": 1412
-    },
-    {
-      "name": "Amon-Ra St. Brown",
-      "team": "DET",
-      "yards": 1401
-    },
-    {
-      "name": "Trey McBride",
-      "team": "ARI",
-      "yards": 1239
-    },
-    {
-      "name": "Zay Flowers",
-      "team": "BAL",
-      "yards": 1211
-    },
-    {
-      "name": "Chris Olave",
-      "team": "NO",
-      "yards": 1163
-    },
-    {
-      "name": "Nico Collins",
-      "team": "HOU",
-      "yards": 1138
-    },
-    {
-      "name": "Stefon Diggs",
-      "team": "NE",
-      "yards": 1123
-    }
-  ]
+  "regular_season_week": 18,
+  "playoff_week": 22,
+  "has_playoffs": true,
+  "regular": {
+    "passers": [
+      {
+        "name": "Matthew Stafford",
+        "team": "LA",
+        "yards": 4707,
+        "tds": 46,
+        "completions": 388,
+        "attempts": 597
+      },
+      {
+        "name": "Jared Goff",
+        "team": "DET",
+        "yards": 4564,
+        "tds": 34,
+        "completions": 393,
+        "attempts": 578
+      },
+      {
+        "name": "Dak Prescott",
+        "team": "DAL",
+        "yards": 4552,
+        "tds": 30,
+        "completions": 404,
+        "attempts": 600
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 4394,
+        "tds": 31,
+        "completions": 354,
+        "attempts": 492
+      },
+      {
+        "name": "Sam Darnold",
+        "team": "SEA",
+        "yards": 4048,
+        "tds": 25,
+        "completions": 323,
+        "attempts": 477
+      },
+      {
+        "name": "Trevor Lawrence",
+        "team": "JAX",
+        "yards": 4007,
+        "tds": 29,
+        "completions": 341,
+        "attempts": 560
+      },
+      {
+        "name": "Caleb Williams",
+        "team": "CHI",
+        "yards": 3942,
+        "tds": 27,
+        "completions": 330,
+        "attempts": 568
+      },
+      {
+        "name": "Bo Nix",
+        "team": "DEN",
+        "yards": 3931,
+        "tds": 25,
+        "completions": 388,
+        "attempts": 612
+      },
+      {
+        "name": "Justin Herbert",
+        "team": "LAC",
+        "yards": 3727,
+        "tds": 26,
+        "completions": 340,
+        "attempts": 512
+      },
+      {
+        "name": "Baker Mayfield",
+        "team": "TB",
+        "yards": 3693,
+        "tds": 26,
+        "completions": 343,
+        "attempts": 543
+      }
+    ],
+    "rushers": [
+      {
+        "name": "James Cook",
+        "team": "BUF",
+        "yards": 1621,
+        "tds": 12,
+        "carries": 309
+      },
+      {
+        "name": "Derrick Henry",
+        "team": "BAL",
+        "yards": 1595,
+        "tds": 16,
+        "carries": 307
+      },
+      {
+        "name": "Jonathan Taylor",
+        "team": "IND",
+        "yards": 1585,
+        "tds": 18,
+        "carries": 323
+      },
+      {
+        "name": "Bijan Robinson",
+        "team": "ATL",
+        "yards": 1478,
+        "tds": 7,
+        "carries": 287
+      },
+      {
+        "name": "De'Von Achane",
+        "team": "MIA",
+        "yards": 1350,
+        "tds": 8,
+        "carries": 238
+      },
+      {
+        "name": "Kyren Williams",
+        "team": "LA",
+        "yards": 1252,
+        "tds": 10,
+        "carries": 259
+      },
+      {
+        "name": "Jahmyr Gibbs",
+        "team": "DET",
+        "yards": 1223,
+        "tds": 13,
+        "carries": 243
+      },
+      {
+        "name": "Christian McCaffrey",
+        "team": "SF",
+        "yards": 1202,
+        "tds": 10,
+        "carries": 311
+      },
+      {
+        "name": "Javonte Williams",
+        "team": "DAL",
+        "yards": 1201,
+        "tds": 11,
+        "carries": 252
+      },
+      {
+        "name": "Saquon Barkley",
+        "team": "PHI",
+        "yards": 1140,
+        "tds": 7,
+        "carries": 280
+      }
+    ],
+    "receivers": [
+      {
+        "name": "Jaxon Smith-Njigba",
+        "team": "SEA",
+        "yards": 1793,
+        "tds": 10,
+        "receptions": 119,
+        "targets": 163
+      },
+      {
+        "name": "Puka Nacua",
+        "team": "LA",
+        "yards": 1715,
+        "tds": 10,
+        "receptions": 129,
+        "targets": 166
+      },
+      {
+        "name": "George Pickens",
+        "team": "DAL",
+        "yards": 1429,
+        "tds": 9,
+        "receptions": 93,
+        "targets": 137
+      },
+      {
+        "name": "Ja'Marr Chase",
+        "team": "CIN",
+        "yards": 1412,
+        "tds": 8,
+        "receptions": 125,
+        "targets": 185
+      },
+      {
+        "name": "Amon-Ra St. Brown",
+        "team": "DET",
+        "yards": 1401,
+        "tds": 11,
+        "receptions": 117,
+        "targets": 172
+      },
+      {
+        "name": "Trey McBride",
+        "team": "ARI",
+        "yards": 1239,
+        "tds": 11,
+        "receptions": 126,
+        "targets": 169
+      },
+      {
+        "name": "Zay Flowers",
+        "team": "BAL",
+        "yards": 1211,
+        "tds": 5,
+        "receptions": 86,
+        "targets": 118
+      },
+      {
+        "name": "Chris Olave",
+        "team": "NO",
+        "yards": 1163,
+        "tds": 9,
+        "receptions": 100,
+        "targets": 156
+      },
+      {
+        "name": "Nico Collins",
+        "team": "HOU",
+        "yards": 1117,
+        "tds": 6,
+        "receptions": 71,
+        "targets": 120
+      },
+      {
+        "name": "Jameson Williams",
+        "team": "DET",
+        "yards": 1117,
+        "tds": 7,
+        "receptions": 65,
+        "targets": 102
+      }
+    ]
+  },
+  "playoffs": {
+    "passers": [
+      {
+        "name": "Matthew Stafford",
+        "team": "LA",
+        "yards": 936,
+        "tds": 6,
+        "completions": 66,
+        "attempts": 119
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 828,
+        "tds": 6,
+        "completions": 70,
+        "attempts": 120
+      },
+      {
+        "name": "Sam Darnold",
+        "team": "SEA",
+        "yards": 672,
+        "tds": 5,
+        "completions": 56,
+        "attempts": 91
+      },
+      {
+        "name": "Caleb Williams",
+        "team": "CHI",
+        "yards": 618,
+        "tds": 4,
+        "completions": 47,
+        "attempts": 90
+      },
+      {
+        "name": "Josh Allen",
+        "team": "BUF",
+        "yards": 556,
+        "tds": 4,
+        "completions": 53,
+        "attempts": 74
+      },
+      {
+        "name": "C.J. Stroud",
+        "team": "HOU",
+        "yards": 462,
+        "tds": 2,
+        "completions": 41,
+        "attempts": 79
+      },
+      {
+        "name": "Brock Purdy",
+        "team": "SF",
+        "yards": 402,
+        "tds": 2,
+        "completions": 33,
+        "attempts": 58
+      },
+      {
+        "name": "Jordan Love",
+        "team": "GB",
+        "yards": 323,
+        "tds": 4,
+        "completions": 24,
+        "attempts": 46
+      },
+      {
+        "name": "Bo Nix",
+        "team": "DEN",
+        "yards": 279,
+        "tds": 3,
+        "completions": 26,
+        "attempts": 46
+      },
+      {
+        "name": "Bryce Young",
+        "team": "CAR",
+        "yards": 264,
+        "tds": 1,
+        "completions": 21,
+        "attempts": 40
+      }
+    ],
+    "rushers": [
+      {
+        "name": "Kenneth Walker III",
+        "team": "SEA",
+        "yards": 313,
+        "tds": 4,
+        "carries": 65
+      },
+      {
+        "name": "Rhamondre Stevenson",
+        "team": "NE",
+        "yards": 217,
+        "tds": 0,
+        "carries": 58
+      },
+      {
+        "name": "Kyren Williams",
+        "team": "LA",
+        "yards": 183,
+        "tds": 2,
+        "carries": 44
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 178,
+        "tds": 1,
+        "carries": 29
+      },
+      {
+        "name": "James Cook",
+        "team": "BUF",
+        "yards": 163,
+        "tds": 0,
+        "carries": 39
+      },
+      {
+        "name": "D'Andre Swift",
+        "team": "CHI",
+        "yards": 130,
+        "tds": 1,
+        "carries": 32
+      },
+      {
+        "name": "Woody Marks",
+        "team": "HOU",
+        "yards": 129,
+        "tds": 1,
+        "carries": 33
+      },
+      {
+        "name": "Blake Corum",
+        "team": "LA",
+        "yards": 119,
+        "tds": 0,
+        "carries": 26
+      },
+      {
+        "name": "Saquon Barkley",
+        "team": "PHI",
+        "yards": 106,
+        "tds": 0,
+        "carries": 26
+      },
+      {
+        "name": "Josh Allen",
+        "team": "BUF",
+        "yards": 99,
+        "tds": 2,
+        "carries": 23
+      }
+    ],
+    "receivers": [
+      {
+        "name": "Puka Nacua",
+        "team": "LA",
+        "yards": 332,
+        "tds": 2,
+        "receptions": 24,
+        "targets": 42
+      },
+      {
+        "name": "Jaxon Smith-Njigba",
+        "team": "SEA",
+        "yards": 199,
+        "tds": 2,
+        "receptions": 17,
+        "targets": 26
+      },
+      {
+        "name": "Colston Loveland",
+        "team": "CHI",
+        "yards": 193,
+        "tds": 0,
+        "receptions": 12,
+        "targets": 25
+      },
+      {
+        "name": "Davante Adams",
+        "team": "LA",
+        "yards": 185,
+        "tds": 1,
+        "receptions": 11,
+        "targets": 25
+      },
+      {
+        "name": "Kayshon Boutte",
+        "team": "NE",
+        "yards": 168,
+        "tds": 1,
+        "receptions": 9,
+        "targets": 20
+      },
+      {
+        "name": "Christian Kirk",
+        "team": "HOU",
+        "yards": 164,
+        "tds": 2,
+        "receptions": 10,
+        "targets": 15
+      },
+      {
+        "name": "Khalil Shakir",
+        "team": "BUF",
+        "yards": 157,
+        "tds": 0,
+        "receptions": 19,
+        "targets": 21
+      },
+      {
+        "name": "Cooper Kupp",
+        "team": "SEA",
+        "yards": 157,
+        "tds": 1,
+        "receptions": 15,
+        "targets": 23
+      },
+      {
+        "name": "Marvin Mims Jr.",
+        "team": "DEN",
+        "yards": 155,
+        "tds": 1,
+        "receptions": 12,
+        "targets": 14
+      },
+      {
+        "name": "Colby Parkinson",
+        "team": "LA",
+        "yards": 152,
+        "tds": 1,
+        "receptions": 8,
+        "targets": 14
+      }
+    ]
+  }
 }
