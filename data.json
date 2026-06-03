@@ -1,0 +1,160 @@
+{
+  "season": 2025,
+  "week": 22,
+  "passers": [
+    {
+      "name": "Matthew Stafford",
+      "team": "LA",
+      "yards": 5643
+    },
+    {
+      "name": "Drake Maye",
+      "team": "NE",
+      "yards": 5222
+    },
+    {
+      "name": "Sam Darnold",
+      "team": "SEA",
+      "yards": 4720
+    },
+    {
+      "name": "Jared Goff",
+      "team": "DET",
+      "yards": 4564
+    },
+    {
+      "name": "Caleb Williams",
+      "team": "CHI",
+      "yards": 4560
+    },
+    {
+      "name": "Dak Prescott",
+      "team": "DAL",
+      "yards": 4552
+    },
+    {
+      "name": "Josh Allen",
+      "team": "BUF",
+      "yards": 4224
+    },
+    {
+      "name": "Trevor Lawrence",
+      "team": "JAX",
+      "yards": 4214
+    },
+    {
+      "name": "Bo Nix",
+      "team": "DEN",
+      "yards": 4210
+    },
+    {
+      "name": "Justin Herbert",
+      "team": "LAC",
+      "yards": 3886
+    }
+  ],
+  "rushers": [
+    {
+      "name": "James Cook",
+      "team": "BUF",
+      "yards": 1784
+    },
+    {
+      "name": "Derrick Henry",
+      "team": "BAL",
+      "yards": 1595
+    },
+    {
+      "name": "Jonathan Taylor",
+      "team": "IND",
+      "yards": 1585
+    },
+    {
+      "name": "Bijan Robinson",
+      "team": "ATL",
+      "yards": 1478
+    },
+    {
+      "name": "Kyren Williams",
+      "team": "LA",
+      "yards": 1435
+    },
+    {
+      "name": "De'Von Achane",
+      "team": "MIA",
+      "yards": 1350
+    },
+    {
+      "name": "Kenneth Walker III",
+      "team": "SEA",
+      "yards": 1340
+    },
+    {
+      "name": "Christian McCaffrey",
+      "team": "SF",
+      "yards": 1285
+    },
+    {
+      "name": "Saquon Barkley",
+      "team": "PHI",
+      "yards": 1246
+    },
+    {
+      "name": "Jahmyr Gibbs",
+      "team": "DET",
+      "yards": 1223
+    }
+  ],
+  "receivers": [
+    {
+      "name": "Puka Nacua",
+      "team": "LA",
+      "yards": 2047
+    },
+    {
+      "name": "Jaxon Smith-Njigba",
+      "team": "SEA",
+      "yards": 1992
+    },
+    {
+      "name": "George Pickens",
+      "team": "DAL",
+      "yards": 1429
+    },
+    {
+      "name": "Ja'Marr Chase",
+      "team": "CIN",
+      "yards": 1412
+    },
+    {
+      "name": "Amon-Ra St. Brown",
+      "team": "DET",
+      "yards": 1401
+    },
+    {
+      "name": "Trey McBride",
+      "team": "ARI",
+      "yards": 1239
+    },
+    {
+      "name": "Zay Flowers",
+      "team": "BAL",
+      "yards": 1211
+    },
+    {
+      "name": "Chris Olave",
+      "team": "NO",
+      "yards": 1163
+    },
+    {
+      "name": "Nico Collins",
+      "team": "HOU",
+      "yards": 1138
+    },
+    {
+      "name": "Stefon Diggs",
+      "team": "NE",
+      "yards": 1123
+    }
+  ]
+}
