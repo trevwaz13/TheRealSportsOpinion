@@ -5,68 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TheRealSportsOpinion — NFL Leaderboards</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e1a; color: #fff; min-height: 100vh; }
-  header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
-  .brand { display: flex; align-items: center; gap: 12px; }
-  .brand-icon { width: 38px; height: 38px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-  .brand-name { font-size: 16px; font-weight: 700; color: #fff; }
-  .brand-sub { font-size: 11px; color: #64748b; }
-  .season-badge { font-size: 11px; background: #1e2a45; color: #94a3b8; padding: 5px 12px; border-radius: 20px; border: 1px solid #2e3f5c; }
-  .hero { text-align: center; padding: 3rem 2rem 1.5rem; }
-  .hero h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-  .hero p { font-size: 14px; color: #64748b; }
-  .data-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #1D9E75; background: #0a2a1e; border: 1px solid #0f3d2a; border-radius: 20px; padding: 5px 14px; width: fit-content; margin: 0 auto 1.5rem; }
-  .tabs { display: flex; justify-content: center; gap: 8px; margin: 0 2rem 1.5rem; }
-  .tab { padding: 8px 22px; border-radius: 8px; border: 1px solid #1e2a45; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
-  .tab:hover { border-color: #2563eb; color: #93c5fd; }
-  .tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
-  .board-wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 3rem; }
-  .board { background: #0d1221; border: 1px solid #1e2a45; border-radius: 14px; overflow: hidden; }
-  .board-header { display: grid; grid-template-columns: 40px 1fr 100px 80px 80px; padding: 10px 20px; background: #111827; border-bottom: 1px solid #1e2a45; font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; }
-  .player-row { display: grid; grid-template-columns: 40px 1fr 100px 80px 80px; align-items: center; padding: 13px 20px; border-bottom: 1px solid #131c30; transition: background 0.1s; cursor: pointer; }
-  .player-row:last-child { border-bottom: none; }
-  .player-row:hover { background: #1a2235; }
-  .player-row:hover .player-name { color: #93c5fd; }
-  .rank { font-size: 13px; font-weight: 700; color: #475569; }
-  .rank.gold { color: #f59e0b; }
-  .rank.silver { color: #94a3b8; }
-  .rank.bronze { color: #b45309; }
-  .player-info { display: flex; align-items: center; gap: 10px; }
-  .avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; overflow: hidden; }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .player-name { font-size: 14px; font-weight: 600; color: #f1f5f9; transition: color 0.1s; }
-  .click-hint { font-size: 10px; color: #334155; margin-top: 1px; }
-  .stat-col .bar-wrap { margin-bottom: 3px; }
-  .stat-bar { height: 4px; border-radius: 2px; background: #1e2a45; width: 100%; overflow: hidden; }
-  .stat-bar-fill { height: 100%; border-radius: 2px; }
-  .stat-primary { font-size: 15px; font-weight: 700; color: #f1f5f9; }
-  .stat-secondary { font-size: 12px; color: #64748b; font-weight: 400; }
-  .board-section { display: none; }
-  .board-section.active { display: block; }
-  .source-note { text-align: center; font-size: 11px; color: #334155; margin-top: 1.5rem; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e1a; color: #fff; min-height: 100vh; }
 
-  /* Modal overlay */
-  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 1000; align-items: center; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: #0d1221; border: 1px solid #1e2a45; border-radius: 20px; width: 90%; max-width: 480px; overflow: hidden; position: relative; }
-  .modal-header { background: #111827; padding: 1.5rem; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #1e2a45; }
-  .modal-headshot { width: 72px; height: 72px; border-radius: 50%; overflow: hidden; background: #1e2a45; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; }
-  .modal-headshot img { width: 100%; height: 100%; object-fit: cover; }
-  .modal-player-name { font-size: 20px; font-weight: 700; color: #f1f5f9; }
-  .modal-player-meta { font-size: 13px; color: #64748b; margin-top: 3px; }
-  .modal-close { position: absolute; top: 1rem; right: 1rem; background: #1e2a45; border: none; color: #94a3b8; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
-  .modal-close:hover { background: #2e3f5c; color: #fff; }
-  .modal-body { padding: 1.25rem 1.5rem; }
-  .stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
-  .stat-box { background: #111827; border-radius: 10px; padding: 0.75rem; text-align: center; }
-  .stat-box-val { font-size: 22px; font-weight: 700; color: #f1f5f9; }
-  .stat-box-lbl { font-size: 11px; color: #475569; margin-top: 2px; }
-  .modal-section-title { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; margin-top: 1rem; }
-  .rank-banner { background: #111827; border-radius: 10px; padding: 0.75rem 1rem; display: flex; align-items: center; justify-content: space-between; }
-  .rank-banner-label { font-size: 13px; color: #64748b; }
-  .rank-banner-val { font-size: 14px; font-weight: 600; color: #f1f5f9; }
-  .modal-footer { padding: 1rem 1.5rem; border-top: 1px solid #1e2a45; font-size: 11px; color: #334155; text-align: center; }
+header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon { width: 38px; height: 38px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.brand-name { font-size: 16px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: #64748b; }
+.season-badge { font-size: 11px; background: #1e2a45; color: #94a3b8; padding: 5px 12px; border-radius: 20px; border: 1px solid #2e3f5c; }
+
+.hero { text-align: center; padding: 2.5rem 2rem 1.25rem; }
+.hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+.hero p { font-size: 13px; color: #64748b; }
+
+.data-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #1D9E75; background: #0a2a1e; border: 1px solid #0f3d2a; border-radius: 20px; padding: 5px 14px; width: fit-content; margin: 0 auto 1.5rem; }
+
+/* Tab row with toggle */
+.controls-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 2rem 1.5rem; flex-wrap: wrap; }
+.tabs { display: flex; gap: 8px; }
+.tab { padding: 7px 20px; border-radius: 8px; border: 1px solid #1e2a45; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.tab:hover { border-color: #2563eb; color: #93c5fd; }
+.tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+/* Season toggle */
+.season-toggle { display: flex; background: #111827; border: 1px solid #1e2a45; border-radius: 8px; overflow: hidden; }
+.toggle-btn { padding: 5px 12px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.15s; white-space: nowrap; }
+.toggle-btn.active { background: #1e3a5f; color: #93c5fd; }
+.toggle-btn.active.playoff { background: #2d1a3a; color: #c4b5fd; }
+.playoff-badge { display: inline-block; font-size: 9px; background: #7c3aed; color: #fff; padding: 1px 5px; border-radius: 10px; margin-left: 4px; vertical-align: middle; }
+
+.board-wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+.board { background: #0d1221; border: 1px solid #1e2a45; border-radius: 14px; overflow: hidden; }
+.board-header { display: grid; grid-template-columns: 40px 1fr 90px 60px 70px 60px; padding: 10px 20px; background: #111827; border-bottom: 1px solid #1e2a45; font-size: 10px; font-weight: 600; color: #475569; letter-spacing: 0.04em; text-transform: uppercase; }
+.player-row { display: grid; grid-template-columns: 40px 1fr 90px 60px 70px 60px; align-items: center; padding: 12px 20px; border-bottom: 1px solid #131c30; cursor: pointer; transition: background 0.1s; }
+.player-row:last-child { border-bottom: none; }
+.player-row:hover { background: #1a2235; }
+.player-row:hover .player-name { color: #93c5fd; }
+
+.rank { font-size: 13px; font-weight: 700; color: #475569; }
+.rank.gold { color: #f59e0b; }
+.rank.silver { color: #94a3b8; }
+.rank.bronze { color: #b45309; }
+.player-info { display: flex; align-items: center; gap: 10px; }
+.avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.player-name { font-size: 13px; font-weight: 600; color: #f1f5f9; transition: color 0.1s; }
+.click-hint { font-size: 10px; color: #334155; }
+.stat-primary { font-size: 14px; font-weight: 700; color: #f1f5f9; }
+.stat-sm { font-size: 12px; color: #64748b; }
+.stat-bar { height: 3px; border-radius: 2px; background: #1e2a45; width: 80%; overflow: hidden; margin-top: 3px; }
+.stat-bar-fill { height: 100%; border-radius: 2px; }
+
+.board-section { display: none; }
+.board-section.active { display: block; }
+.source-note { text-align: center; font-size: 11px; color: #334155; margin-top: 1.5rem; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: #0d1221; border: 1px solid #1e2a45; border-radius: 20px; width: 92%; max-width: 460px; overflow: hidden; position: relative; }
+.modal-header { background: #111827; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #1e2a45; }
+.modal-headshot { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
+.modal-headshot img { width: 100%; height: 100%; object-fit: cover; }
+.modal-player-name { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+.modal-player-meta { font-size: 12px; color: #64748b; margin-top: 3px; }
+.modal-close { position: absolute; top: 0.85rem; right: 0.85rem; background: #1e2a45; border: none; color: #94a3b8; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: #2e3f5c; color: #fff; }
+
+/* Modal season toggle */
+.modal-toggle-wrap { display: flex; justify-content: center; padding: 0.85rem 1.5rem 0; }
+.modal-season-toggle { display: flex; background: #111827; border: 1px solid #1e2a45; border-radius: 8px; overflow: hidden; }
+.modal-toggle-btn { padding: 5px 16px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.15s; }
+.modal-toggle-btn.active { background: #1e3a5f; color: #93c5fd; }
+.modal-toggle-btn.active.playoff { background: #2d1a3a; color: #c4b5fd; }
+
+.modal-body { padding: 1rem 1.5rem 1.25rem; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.stat-box { background: #111827; border-radius: 10px; padding: 0.7rem; text-align: center; }
+.stat-box-val { font-size: 20px; font-weight: 700; color: #f1f5f9; }
+.stat-box-lbl { font-size: 10px; color: #475569; margin-top: 2px; }
+.stat-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.rank-banner { background: #111827; border-radius: 10px; padding: 0.7rem 1rem; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.rank-banner-label { font-size: 12px; color: #64748b; }
+.rank-banner-val { font-size: 13px; font-weight: 600; color: #f1f5f9; }
+.no-playoff-msg { text-align: center; padding: 1.5rem; color: #475569; font-size: 13px; }
+.modal-footer { padding: 0.75rem 1.5rem; border-top: 1px solid #1e2a45; font-size: 11px; color: #334155; text-align: center; }
 </style>
 </head>
 <body>
@@ -89,38 +113,44 @@
 
 <div class="data-note">✦ Real data via nflreadpy · Click any player for full profile</div>
 
-<div class="tabs">
-  <button class="tab active" onclick="showTab('passing', this)">Passing</button>
-  <button class="tab" onclick="showTab('rushing', this)">Rushing</button>
-  <button class="tab" onclick="showTab('receiving', this)">Receiving</button>
+<div class="controls-row">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('passing', this)">Passing</button>
+    <button class="tab" onclick="showTab('rushing', this)">Rushing</button>
+    <button class="tab" onclick="showTab('receiving', this)">Receiving</button>
+  </div>
+  <div class="season-toggle">
+    <button class="toggle-btn active" onclick="setSeasonMode('regular', this)">Regular Season</button>
+    <button class="toggle-btn" onclick="setSeasonMode('playoffs', this)">Playoffs <span class="playoff-badge">POST</span></button>
+  </div>
 </div>
 
 <div class="board-wrap">
   <div class="board-section active" id="tab-passing">
     <div class="board">
-      <div class="board-header"><span>#</span><span>Player</span><span>Pass Yds</span><span>Team</span><span>Rank</span></div>
-      <div id="passing-rows"><div style="padding:2rem;text-align:center;color:#475569">Loading...</div></div>
+      <div class="board-header"><span>#</span><span>Player</span><span>Yards</span><span>TDs</span><span>CMP/ATT</span><span>Team</span></div>
+      <div id="passing-rows"></div>
     </div>
   </div>
   <div class="board-section" id="tab-rushing">
     <div class="board">
-      <div class="board-header"><span>#</span><span>Player</span><span>Rush Yds</span><span>Team</span><span>Rank</span></div>
-      <div id="rushing-rows"><div style="padding:2rem;text-align:center;color:#475569">Loading...</div></div>
+      <div class="board-header"><span>#</span><span>Player</span><span>Yards</span><span>TDs</span><span>Carries</span><span>Team</span></div>
+      <div id="rushing-rows"></div>
     </div>
   </div>
   <div class="board-section" id="tab-receiving">
     <div class="board">
-      <div class="board-header"><span>#</span><span>Player</span><span>Rec Yds</span><span>Team</span><span>Rank</span></div>
-      <div id="receiving-rows"><div style="padding:2rem;text-align:center;color:#475569">Loading...</div></div>
+      <div class="board-header"><span>#</span><span>Player</span><span>Yards</span><span>TDs</span><span>REC/TGT</span><span>Team</span></div>
+      <div id="receiving-rows"></div>
     </div>
   </div>
   <div class="source-note">Data: nflreadpy · Built by Trevor Waz · MS Analytics candidate, TLU · <span id="update-date"></span></div>
 </div>
 
-<!-- Player Modal -->
-<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal">
-    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-header">
       <div class="modal-headshot" id="modal-headshot"></div>
       <div>
@@ -128,14 +158,13 @@
         <div class="modal-player-meta" id="modal-meta"></div>
       </div>
     </div>
-    <div class="modal-body">
-      <div class="stat-grid" id="modal-stats"></div>
-      <div class="modal-section-title">Season ranking</div>
-      <div class="rank-banner">
-        <span class="rank-banner-label" id="modal-rank-label"></span>
-        <span class="rank-banner-val" id="modal-rank-val"></span>
+    <div class="modal-toggle-wrap">
+      <div class="modal-season-toggle">
+        <button class="modal-toggle-btn active" id="modal-reg-btn" onclick="setModalMode('regular')">Regular Season</button>
+        <button class="modal-toggle-btn" id="modal-post-btn" onclick="setModalMode('playoffs')">Playoffs</button>
       </div>
     </div>
+    <div class="modal-body" id="modal-body"></div>
     <div class="modal-footer">2025 NFL Season · TheRealSportsOpinion</div>
   </div>
 </div>
@@ -147,139 +176,217 @@ const avatarColors = [
   ['#3d1f2d','#f9a8d4'],['#1f3d2a','#86efac'],['#3d2d1f','#fdba74'],['#1f1f3d','#a5b4fc']
 ];
 
-const posMap = { passers: 'QB', rushers: 'RB', receivers: 'WR/TE' };
 let allData = null;
+let currentTab = 'passing';
+let currentSeason = 'regular';
+let currentModalPlayer = null;
+let currentModalCategory = null;
+let currentModalRank = 0;
 
 function initials(name) {
   return name.split(' ').filter(p => p.length > 1).map(p => p[0]).join('').slice(0,2).toUpperCase();
 }
-
-function rankLabel(i) {
-  return i === 0 ? '🥇 1st' : i === 1 ? '🥈 2nd' : i === 2 ? '🥉 3rd' : `${i+1}th`;
-}
-
-function rankClass(i) {
-  return i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-}
+function rankLabel(i) { return i === 0 ? '🥇 1st' : i === 1 ? '🥈 2nd' : i === 2 ? '🥉 3rd' : `${i+1}th`; }
+function rankClass(i) { return i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''; }
 
 function getHeadshotUrl(name) {
   const parts = name.split(' ');
   if (parts.length < 2) return null;
   const first = parts[0].toLowerCase().replace(/[^a-z]/g,'');
   const last = parts[parts.length-1].toLowerCase().replace(/[^a-z]/g,'');
-  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${first}_${last}.png&w=130&h=100&cb=1`;
+  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${first}_${last}.png&w=130&h=100`;
 }
 
-function openModal(player, category, rank) {
-  const pos = posMap[category];
-  const yardKey = category === 'passers' ? 'passing_yards' : category === 'rushers' ? 'rushing_yards' : 'receiving_yards';
+function tryLoadHeadshot(name, el) {
+  const url = getHeadshotUrl(name);
+  if (!url) return;
+  const img = new Image();
+  img.onload = () => { el.innerHTML = `<img src="${url}" alt="${name}">`; };
+  img.src = url;
+}
 
-  document.getElementById('modal-name').textContent = player.name;
-  document.getElementById('modal-meta').textContent = `${player.team} · ${pos} · 2025 Season`;
-
-  const headshot = document.getElementById('modal-headshot');
-  const [bg, fg] = avatarColors[rank];
-  headshot.style.background = bg;
-  headshot.style.color = fg;
-  headshot.innerHTML = `<span style="font-size:22px;font-weight:700">${initials(player.name)}</span>`;
-
-  const imgUrl = getHeadshotUrl(player.name);
-  if (imgUrl) {
-    const img = new Image();
-    img.onload = () => { headshot.innerHTML = `<img src="${imgUrl}" alt="${player.name}">`; };
-    img.src = imgUrl;
+function buildRows(players, category, color, seasonMode) {
+  if (!players || players.length === 0) {
+    return `<div style="padding:2rem;text-align:center;color:#475569">No ${seasonMode === 'playoffs' ? 'playoff' : 'regular season'} data available.</div>`;
   }
-
-  const statLabel = category === 'passers' ? 'Pass Yards' : category === 'rushers' ? 'Rush Yards' : 'Rec Yards';
-  document.getElementById('modal-stats').innerHTML = `
-    <div class="stat-box"><div class="stat-box-val">${player.yards.toLocaleString()}</div><div class="stat-box-lbl">${statLabel}</div></div>
-    <div class="stat-box"><div class="stat-box-val">${player.team}</div><div class="stat-box-lbl">Team</div></div>
-    <div class="stat-box"><div class="stat-box-val">${rankLabel(rank)}</div><div class="stat-box-lbl">League Rank</div></div>
-  `;
-
-  document.getElementById('modal-rank-label').textContent = `${statLabel} rank among all ${pos}s`;
-  document.getElementById('modal-rank-val').textContent = `#${rank+1} in the NFL`;
-
-  document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e) {
-  if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
-}
-
-function closeModalDirect() {
-  document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
-
-function buildRows(players, category, color) {
   const max = players[0].yards;
   return players.map((p, i) => {
     const [bg, fg] = avatarColors[i];
     const bw = Math.round((p.yards / max) * 100);
-    return `<div class="player-row" onclick="openModal(${JSON.stringify(p).replace(/"/g,'&quot;')}, '${category}', ${i})">
+    let extra = '';
+    if (category === 'passing') extra = `${p.completions}/${p.attempts}`;
+    else if (category === 'rushing') extra = `${p.carries} car`;
+    else extra = `${p.receptions}/${p.targets}`;
+
+    const pJson = encodeURIComponent(JSON.stringify(p));
+    return `<div class="player-row" onclick="openModal('${pJson}','${category}',${i})">
       <span class="rank ${rankClass(i)}">${i+1}</span>
       <div class="player-info">
-        <div class="avatar" style="background:${bg};color:${fg}" id="av-${category}-${i}">${initials(p.name)}</div>
-        <div>
-          <div class="player-name">${p.name}</div>
-          <div class="click-hint">Click for profile</div>
-        </div>
+        <div class="avatar" style="background:${bg};color:${fg}" id="av-${seasonMode}-${category}-${i}">${initials(p.name)}</div>
+        <div><div class="player-name">${p.name}</div><div class="click-hint">Click for profile</div></div>
       </div>
-      <div class="stat-col">
-        <div class="bar-wrap"><div class="stat-bar"><div class="stat-bar-fill" style="width:${bw}%;background:${color}"></div></div></div>
-        <div class="stat-primary">${p.yards.toLocaleString()} <span class="stat-secondary">yds</span></div>
+      <div>
+        <div class="stat-primary">${p.yards.toLocaleString()}</div>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:${bw}%;background:${color}"></div></div>
       </div>
-      <div class="stat-primary" style="font-size:13px">${p.team}</div>
-      <div style="font-size:12px;color:#64748b">${rankLabel(i)}</div>
+      <div class="stat-primary">${p.tds}</div>
+      <div class="stat-sm">${extra}</div>
+      <div class="stat-sm">${p.team}</div>
     </div>`;
   }).join('');
 }
 
-function loadAvatars(players, category) {
-  players.forEach((p, i) => {
-    const el = document.getElementById(`av-${category}-${i}`);
-    if (!el) return;
-    const imgUrl = getHeadshotUrl(p.name);
-    if (!imgUrl) return;
-    const img = new Image();
-    img.onload = () => { el.innerHTML = `<img src="${imgUrl}" alt="${p.name}">`; };
-    img.src = imgUrl;
+function renderBoards() {
+  if (!allData) return;
+  const src = currentSeason === 'regular' ? allData.regular : allData.playoffs;
+  const color = { passing: '#2563eb', rushing: '#16a34a', receiving: '#9333ea' };
+  document.getElementById('passing-rows').innerHTML = buildRows(src.passers, 'passing', color.passing, currentSeason);
+  document.getElementById('rushing-rows').innerHTML = buildRows(src.rushers, 'rushing', color.rushing, currentSeason);
+  document.getElementById('receiving-rows').innerHTML = buildRows(src.receivers, 'receiving', color.receiving, currentSeason);
+  loadAllAvatars(src);
+}
+
+function loadAllAvatars(src) {
+  ['passers','rushers','receivers'].forEach(cat => {
+    const short = cat === 'passers' ? 'passing' : cat === 'rushers' ? 'rushing' : 'receiving';
+    (src[cat] || []).forEach((p, i) => {
+      const el = document.getElementById(`av-${currentSeason}-${short}-${i}`);
+      if (el) tryLoadHeadshot(p.name, el);
+    });
   });
 }
+
+function showTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+function setSeasonMode(mode, btn) {
+  currentSeason = mode;
+  document.querySelectorAll('.toggle-btn').forEach(b => {
+    b.classList.remove('active','playoff');
+  });
+  btn.classList.add('active');
+  if (mode === 'playoffs') btn.classList.add('playoff');
+  const sub = document.getElementById('hero-sub');
+  if (mode === 'regular') {
+    sub.textContent = `Regular season stats · 2025 NFL season · Through week ${allData.regular_season_week}`;
+  } else {
+    sub.textContent = allData.has_playoffs ? `Playoff stats · 2025 NFL postseason` : `Playoff stats · 2025 NFL postseason (not yet available)`;
+  }
+  renderBoards();
+}
+
+function openModal(pJson, category, rank) {
+  const p = JSON.parse(decodeURIComponent(pJson));
+  currentModalPlayer = p;
+  currentModalCategory = category;
+  currentModalRank = rank;
+
+  const posMap = { passing: 'QB', rushing: 'RB', receiving: 'WR/TE' };
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-meta').textContent = `${p.team} · ${posMap[category]} · 2025 Season`;
+
+  const [bg, fg] = avatarColors[rank];
+  const hs = document.getElementById('modal-headshot');
+  hs.style.background = bg;
+  hs.style.color = fg;
+  hs.innerHTML = `<span>${initials(p.name)}</span>`;
+  tryLoadHeadshot(p.name, hs);
+
+  setModalMode(currentSeason);
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function setModalMode(mode) {
+  document.getElementById('modal-reg-btn').classList.toggle('active', mode === 'regular');
+  document.getElementById('modal-post-btn').classList.toggle('active', mode === 'playoffs');
+  document.getElementById('modal-post-btn').classList.toggle('playoff', mode === 'playoffs');
+
+  if (!currentModalPlayer || !currentModalCategory) return;
+
+  const src = mode === 'regular' ? allData.regular : allData.playoffs;
+  const cat = currentModalCategory === 'passing' ? 'passers' : currentModalCategory === 'rushing' ? 'rushers' : 'receivers';
+  const playerInMode = src[cat].find(p => p.name === currentModalPlayer.name);
+
+  const body = document.getElementById('modal-body');
+
+  if (!playerInMode) {
+    body.innerHTML = `<div class="no-playoff-msg">No ${mode === 'playoffs' ? 'playoff' : 'regular season'} stats available for ${currentModalPlayer.name}.</div>`;
+    return;
+  }
+
+  const p = playerInMode;
+  let statsHtml = '';
+  let extraHtml = '';
+
+  if (currentModalCategory === 'passing') {
+    statsHtml = `
+      <div class="stat-box"><div class="stat-box-val">${p.yards.toLocaleString()}</div><div class="stat-box-lbl">Pass Yards</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.tds}</div><div class="stat-box-lbl">Touchdowns</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.completions}/${p.attempts}</div><div class="stat-box-lbl">CMP/ATT</div></div>`;
+    const pct = p.attempts > 0 ? ((p.completions / p.attempts) * 100).toFixed(1) : '0.0';
+    extraHtml = `<div class="stat-grid-2" style="margin-top:8px">
+      <div class="stat-box"><div class="stat-box-val">${pct}%</div><div class="stat-box-lbl">Completion %</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.attempts > 0 ? (p.yards / p.attempts).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Attempt</div></div>
+    </div>`;
+  } else if (currentModalCategory === 'rushing') {
+    statsHtml = `
+      <div class="stat-box"><div class="stat-box-val">${p.yards.toLocaleString()}</div><div class="stat-box-lbl">Rush Yards</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.tds}</div><div class="stat-box-lbl">Touchdowns</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.carries}</div><div class="stat-box-lbl">Carries</div></div>`;
+    extraHtml = `<div class="stat-grid-2" style="margin-top:8px">
+      <div class="stat-box"><div class="stat-box-val">${p.carries > 0 ? (p.yards / p.carries).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Carry</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.team}</div><div class="stat-box-lbl">Team</div></div>
+    </div>`;
+  } else {
+    statsHtml = `
+      <div class="stat-box"><div class="stat-box-val">${p.yards.toLocaleString()}</div><div class="stat-box-lbl">Rec Yards</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.tds}</div><div class="stat-box-lbl">Touchdowns</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.receptions}/${p.targets}</div><div class="stat-box-lbl">REC/TGT</div></div>`;
+    extraHtml = `<div class="stat-grid-2" style="margin-top:8px">
+      <div class="stat-box"><div class="stat-box-val">${p.targets > 0 ? ((p.receptions/p.targets)*100).toFixed(1) : '0.0'}%</div><div class="stat-box-lbl">Catch Rate</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.receptions > 0 ? (p.yards/p.receptions).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Rec</div></div>
+    </div>`;
+  }
+
+  const rankIdx = src[cat].findIndex(x => x.name === p.name);
+  body.innerHTML = `
+    <div class="stat-grid">${statsHtml}</div>
+    ${extraHtml}
+    <div class="rank-banner" style="margin-top:10px">
+      <span class="rank-banner-label">${mode === 'playoffs' ? 'Playoff' : 'Regular season'} rank</span>
+      <span class="rank-banner-val">${rankLabel(rankIdx >= 0 ? rankIdx : currentModalRank)}</span>
+    </div>`;
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 async function loadData() {
   try {
     const res = await fetch('data.json');
-    if (!res.ok) throw new Error('Could not load data.json');
+    if (!res.ok) throw new Error('No data.json');
     allData = await res.json();
 
-    document.getElementById('season-badge').textContent = `${allData.season} Season · Week ${allData.week}`;
-    document.getElementById('hero-sub').textContent = `Top performers from the ${allData.season} NFL season · Through week ${allData.week}`;
+    document.getElementById('season-badge').textContent = `${allData.season} Season`;
+    document.getElementById('hero-sub').textContent = `Regular season stats · 2025 NFL season · Through week ${allData.regular_season_week}`;
     document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'});
 
-    document.getElementById('passing-rows').innerHTML = buildRows(allData.passers, 'passers', '#2563eb');
-    document.getElementById('rushing-rows').innerHTML = buildRows(allData.rushers, 'rushers', '#16a34a');
-    document.getElementById('receiving-rows').innerHTML = buildRows(allData.receivers, 'receivers', '#9333ea');
-
-    loadAvatars(allData.passers, 'passers');
-    loadAvatars(allData.rushers, 'rushers');
-    loadAvatars(allData.receivers, 'receivers');
+    renderBoards();
   } catch(e) {
     ['passing-rows','rushing-rows','receiving-rows'].forEach(id => {
       document.getElementById(id).innerHTML = `<div style="padding:2rem;text-align:center;color:#f87171">Could not load data. Run export_data.py to refresh.</div>`;
     });
   }
-}
-
-function showTab(tab, btn) {
-  document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + tab).classList.add('active');
-  btn.classList.add('active');
 }
 
 loadData();
