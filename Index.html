@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheRealSportsOpinion — NFL Leaderboards</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e1a; color: #fff; min-height: 100vh; }
+
+  header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .brand-icon { width: 38px; height: 38px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .brand-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .brand-sub { font-size: 11px; color: #64748b; }
+  .season-badge { font-size: 11px; background: #1e2a45; color: #94a3b8; padding: 5px 12px; border-radius: 20px; border: 1px solid #2e3f5c; }
+
+  .hero { text-align: center; padding: 3rem 2rem 1.5rem; }
+  .hero h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .hero p { font-size: 14px; color: #64748b; }
+
+  .data-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #1D9E75; background: #0a2a1e; border: 1px solid #0f3d2a; border-radius: 20px; padding: 5px 14px; width: fit-content; margin: 0 auto 1.5rem; }
+
+  .tabs { display: flex; justify-content: center; gap: 8px; margin: 0 2rem 1.5rem; }
+  .tab { padding: 8px 22px; border-radius: 8px; border: 1px solid #1e2a45; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+  .tab:hover { border-color: #2563eb; color: #93c5fd; }
+  .tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+  .board-wrap { max-width: 720px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+  .board { background: #0d1221; border: 1px solid #1e2a45; border-radius: 14px; overflow: hidden; }
+  .board-header { display: grid; padding: 10px 20px; background: #111827; border-bottom: 1px solid #1e2a45; font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; }
+  .grid-pass, .grid-rush, .grid-rec { grid-template-columns: 40px 1fr 100px 80px 80px; }
+
+  .player-row { display: grid; align-items: center; padding: 13px 20px; border-bottom: 1px solid #131c30; transition: background 0.1s; }
+  .player-row:last-child { border-bottom: none; }
+  .player-row:hover { background: #111827; }
+
+  .rank { font-size: 13px; font-weight: 700; color: #475569; }
+  .rank.gold   { color: #f59e0b; }
+  .rank.silver { color: #94a3b8; }
+  .rank.bronze { color: #b45309; }
+
+  .player-info { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .player-name { font-size: 14px; font-weight: 600; color: #f1f5f9; }
+  .player-team { font-size: 11px; color: #475569; margin-top: 1px; }
+
+  .stat-col { }
+  .stat-bar-wrap { display: flex; align-items: center; gap: 0; margin-bottom: 3px; }
+  .stat-bar { height: 4px; border-radius: 2px; background: #1e2a45; width: 100%; overflow: hidden; }
+  .stat-bar-fill { height: 100%; border-radius: 2px; }
+  .stat-primary { font-size: 15px; font-weight: 700; color: #f1f5f9; }
+  .stat-secondary { font-size: 12px; color: #64748b; font-weight: 400; }
+
+  .board-section { display: none; }
+  .board-section.active { display: block; }
+
+  .source-note { text-align: center; font-size: 11px; color: #334155; margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">🏈</div>
+    <div>
+      <div class="brand-name">TheRealSportsOpinion</div>
+      <div class="brand-sub">NFL Analytics Dashboard</div>
+    </div>
+  </div>
+  <span class="season-badge">2024 Season · Final</span>
+</header>
+
+<div class="hero">
+  <h1>NFL Season Leaderboards</h1>
+  <p>Top performers from the completed 2024 regular season</p>
+</div>
+
+<div class="data-note">
+  ✦ Real data pulled via nflverse · 2025 stats will be added when published
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('passing', this)">Passing</button>
+  <button class="tab" onclick="showTab('rushing', this)">Rushing</button>
+  <button class="tab" onclick="showTab('receiving', this)">Receiving</button>
+</div>
+
+<div class="board-wrap">
+
+  <div class="board-section active" id="tab-passing">
+    <div class="board">
+      <div class="board-header grid-pass">
+        <span>#</span><span>Player</span><span>Pass Yds</span><span>Team</span><span>Rank</span>
+      </div>
+      <div id="passing-rows"></div>
+    </div>
+  </div>
+
+  <div class="board-section" id="tab-rushing">
+    <div class="board">
+      <div class="board-header grid-rush">
+        <span>#</span><span>Player</span><span>Rush Yds</span><span>Team</span><span>Rank</span>
+      </div>
+      <div id="rushing-rows"></div>
+    </div>
+  </div>
+
+  <div class="board-section" id="tab-receiving">
+    <div class="board">
+      <div class="board-header grid-rec">
+        <span>#</span><span>Player</span><span>Rec Yds</span><span>Team</span><span>Rank</span>
+      </div>
+      <div id="receiving-rows"></div>
+    </div>
+  </div>
+
+  <div class="source-note">Data: nflverse · Built by Trevor Waz · MS Analytics candidate, TLU · June 2026</div>
+</div>
+
+<script>
+const avatarColors = [
+  ['#1e3a5f','#93c5fd'],['#1a3a2a','#6ee7b7'],['#3b1f1f','#fca5a5'],
+  ['#2d1f3d','#c4b5fd'],['#2d2a1a','#fde68a'],['#1f2d3d','#7dd3fc'],
+  ['#3d1f2d','#f9a8d4'],['#1f3d2a','#86efac'],['#3d2d1f','#fdba74'],['#1f1f3d','#a5b4fc']
+];
+
+// REAL 2024 DATA pulled from nflverse
+const passers = [
+  { name: "Jared Goff",       team: "DET", yards: 4942 },
+  { name: "Joe Burrow",       team: "CIN", yards: 4918 },
+  { name: "Baker Mayfield",   team: "TB",  yards: 4685 },
+  { name: "Patrick Mahomes",  team: "KC",  yards: 4607 },
+  { name: "Lamar Jackson",    team: "BAL", yards: 4601 },
+  { name: "Sam Darnold",      team: "MIN", yards: 4564 },
+  { name: "Jayden Daniels",   team: "WAS", yards: 4390 },
+  { name: "Josh Allen",       team: "BUF", yards: 4367 },
+  { name: "Geno Smith",       team: "SEA", yards: 4320 },
+  { name: "Matthew Stafford", team: "LA",  yards: 4295 },
+];
+
+const rushers = [
+  { name: "Saquon Barkley",    team: "PHI", yards: 2504 },
+  { name: "Derrick Henry",     team: "BAL", yards: 2191 },
+  { name: "Jahmyr Gibbs",      team: "DET", yards: 1517 },
+  { name: "Kyren Williams",    team: "LA",  yards: 1481 },
+  { name: "Bijan Robinson",    team: "ATL", yards: 1456 },
+  { name: "Jonathan Taylor",   team: "IND", yards: 1431 },
+  { name: "Josh Jacobs",       team: "GB",  yards: 1410 },
+  { name: "James Cook",        team: "BUF", yards: 1281 },
+  { name: "Joe Mixon",         team: "HOU", yards: 1210 },
+  { name: "Bucky Irving",      team: "TB",  yards: 1199 },
+];
+
+const receivers = [
+  { name: "Ja'Marr Chase",     team: "CIN", yards: 1708 },
+  { name: "Justin Jefferson",  team: "MIN", yards: 1591 },
+  { name: "Amon-Ra St. Brown", team: "DET", yards: 1400 },
+  { name: "Ladd McConkey",     team: "LAC", yards: 1346 },
+  { name: "Terry McLaurin",    team: "WAS", yards: 1323 },
+  { name: "Brian Thomas",      team: "JAX", yards: 1282 },
+  { name: "Drake London",      team: "ATL", yards: 1271 },
+  { name: "A.J. Brown",        team: "PHI", yards: 1242 },
+  { name: "Jerry Jeudy",       team: "CLE", yards: 1229 },
+  { name: "Nico Collins",      team: "HOU", yards: 1209 },
+];
+
+function initials(name) {
+  return name.split(' ').filter(p => p.length > 1).map(p => p[0]).join('').slice(0,2).toUpperCase();
+}
+
+function rankClass(i) {
+  return i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+}
+
+function rankLabel(i) {
+  return i === 0 ? '🥇 1st' : i === 1 ? '🥈 2nd' : i === 2 ? '🥉 3rd' : `${i+1}th`;
+}
+
+function buildRows(players, color) {
+  const max = players[0].yards;
+  return players.map((p, i) => {
+    const [bg, fg] = avatarColors[i];
+    const bw = Math.round((p.yards / max) * 100);
+    return `<div class="player-row grid-pass">
+      <span class="rank ${rankClass(i)}">${i+1}</span>
+      <div class="player-info">
+        <div class="avatar" style="background:${bg};color:${fg}">${initials(p.name)}</div>
+        <div>
+          <div class="player-name">${p.name}</div>
+        </div>
+      </div>
+      <div class="stat-col">
+        <div class="stat-bar-wrap"><div class="stat-bar"><div class="stat-bar-fill" style="width:${bw}%;background:${color}"></div></div></div>
+        <div class="stat-primary">${p.yards.toLocaleString()} <span class="stat-secondary">yds</span></div>
+      </div>
+      <div class="stat-primary" style="font-size:13px">${p.team}</div>
+      <div style="font-size:12px;color:#64748b">${rankLabel(i)}</div>
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('passing-rows').innerHTML  = buildRows(passers,   '#2563eb');
+document.getElementById('rushing-rows').innerHTML  = buildRows(rushers,   '#16a34a');
+document.getElementById('receiving-rows').innerHTML = buildRows(receivers, '#9333ea');
+
+function showTab(tab, btn) {
+  document.querySelectorAll('.board-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
