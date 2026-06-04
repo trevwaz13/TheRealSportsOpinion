@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheRealSportsOpinion — NFL Teams</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0e1a; color: #fff; min-height: 100vh; }
+
+header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand-icon { width: 38px; height: 38px; background: #2563eb; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.brand-name { font-size: 16px; font-weight: 700; color: #fff; }
+.brand-sub { font-size: 11px; color: #64748b; }
+.nav-links { display: flex; gap: 8px; }
+.nav-link { font-size: 12px; padding: 5px 14px; border-radius: 8px; border: 1px solid #1e2a45; color: #64748b; text-decoration: none; transition: all 0.15s; }
+.nav-link:hover { border-color: #2563eb; color: #93c5fd; }
+.nav-link.active { background: #1e2a45; color: #f1f5f9; border-color: #2e3f5c; }
+.season-badge { font-size: 11px; background: #1e2a45; color: #94a3b8; padding: 5px 12px; border-radius: 20px; border: 1px solid #2e3f5c; }
+
+.hero { text-align: center; padding: 2.5rem 2rem 1.5rem; }
+.hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+.hero p { font-size: 13px; color: #64748b; }
+
+.conf-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 1.5rem; }
+.conf-tab { padding: 7px 20px; border-radius: 8px; border: 1px solid #1e2a45; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.conf-tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+
+.standings-wrap { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+.division-section { margin-bottom: 2rem; }
+.division-title { font-size: 11px; font-weight: 600; color: #475569; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; padding-left: 4px; }
+.standings-table { background: #0d1221; border: 1px solid #1e2a45; border-radius: 14px; overflow: hidden; }
+.standings-header { display: grid; grid-template-columns: 40px 1fr 80px 60px 70px 70px 70px; padding: 8px 16px; background: #111827; border-bottom: 1px solid #1e2a45; font-size: 10px; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; }
+.team-row { display: grid; grid-template-columns: 40px 1fr 80px 60px 70px 70px 70px; align-items: center; padding: 11px 16px; border-bottom: 1px solid #131c30; cursor: pointer; transition: background 0.1s; }
+.team-row:last-child { border-bottom: none; }
+.team-row:hover { background: #1a2235; }
+.team-row:hover .team-name { color: #93c5fd; }
+.team-rank { font-size: 12px; color: #475569; font-weight: 600; }
+.team-info { display: flex; align-items: center; gap: 10px; }
+.team-logo { width: 32px; height: 32px; border-radius: 6px; background: #1e2a45; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #94a3b8; flex-shrink: 0; }
+.team-name { font-size: 13px; font-weight: 600; color: #f1f5f9; transition: color 0.1s; }
+.record { font-size: 14px; font-weight: 700; color: #f1f5f9; }
+.pct { font-size: 13px; color: #64748b; }
+.pts { font-size: 13px; color: #f1f5f9; }
+.pts-neg { color: #f87171; }
+.pts-pos { color: #4ade80; }
+.win-bar-wrap { display: flex; align-items: center; }
+.win-bar { height: 4px; width: 60px; background: #1e2a45; border-radius: 2px; overflow: hidden; }
+.win-fill { height: 100%; background: #2563eb; border-radius: 2px; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; align-items: flex-start; justify-content: center; overflow-y: auto; padding: 2rem 1rem; }
+.modal-overlay.open { display: flex; }
+.modal { background: #0d1221; border: 1px solid #1e2a45; border-radius: 20px; width: 100%; max-width: 600px; overflow: hidden; position: relative; margin: auto; }
+.modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); border: none; color: #94a3b8; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; z-index: 10; }
+.modal-close:hover { background: #1e2a45; color: #fff; }
+
+.team-hero { background: #111827; padding: 1.5rem; border-bottom: 1px solid #1e2a45; }
+.team-hero-top { display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; }
+.team-logo-lg { width: 56px; height: 56px; border-radius: 10px; background: #1e2a45; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: #94a3b8; }
+.team-hero-name { font-size: 22px; font-weight: 700; color: #f1f5f9; }
+.team-hero-meta { font-size: 13px; color: #64748b; margin-top: 3px; }
+.hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.hero-stat { background: #0d1221; border-radius: 10px; padding: 0.7rem; text-align: center; }
+.hero-stat-val { font-size: 20px; font-weight: 700; color: #f1f5f9; }
+.hero-stat-lbl { font-size: 10px; color: #475569; margin-top: 2px; }
+
+.modal-tabs { display: flex; border-bottom: 1px solid #1e2a45; }
+.modal-tab { flex: 1; padding: 10px; font-size: 12px; font-weight: 500; color: #64748b; cursor: pointer; border: none; background: transparent; border-bottom: 2px solid transparent; transition: all 0.15s; text-align: center; }
+.modal-tab.active { color: #93c5fd; border-bottom-color: #2563eb; }
+
+.modal-body { padding: 1.25rem; max-height: 420px; overflow-y: auto; }
+
+/* Stats tab */
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat-box { background: #111827; border-radius: 10px; padding: 0.75rem; text-align: center; }
+.stat-box-val { font-size: 18px; font-weight: 700; color: #f1f5f9; }
+.stat-box-lbl { font-size: 10px; color: #475569; margin-top: 2px; }
+.top-players-section { margin-top: 12px; }
+.section-label { font-size: 10px; font-weight: 600; color: #475569; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px; }
+.top-player-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid #1e2a45; font-size: 13px; }
+.top-player-row:last-child { border-bottom: none; }
+.top-player-pos { font-size: 10px; background: #1e2a45; color: #94a3b8; padding: 2px 7px; border-radius: 10px; margin-right: 8px; }
+.top-player-name { color: #f1f5f9; font-weight: 500; }
+.top-player-stat { color: #2563eb; font-weight: 700; }
+
+/* Schedule tab */
+.sched-row { display: grid; grid-template-columns: 36px 30px 1fr 80px; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 0.5px solid #1e2a45; font-size: 12px; }
+.sched-row:last-child { border-bottom: none; }
+.sched-week { color: #475569; font-weight: 600; }
+.sched-ha { font-size: 10px; color: #475569; }
+.sched-opp { color: #f1f5f9; font-weight: 500; }
+.sched-result { font-weight: 700; text-align: right; }
+.result-w { color: #4ade80; }
+.result-l { color: #f87171; }
+.result-t { color: #fbbf24; }
+.result-tbd { color: #475569; }
+.playoff-label { font-size: 9px; background: #7c3aed; color: #fff; padding: 1px 5px; border-radius: 10px; margin-left: 4px; }
+
+/* Roster tab */
+.roster-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.roster-card { display: flex; align-items: center; gap: 8px; background: #111827; border-radius: 8px; padding: 8px 10px; }
+.roster-num { font-size: 11px; color: #475569; width: 20px; text-align: center; }
+.roster-avatar { width: 28px; height: 28px; border-radius: 50%; background: #1e2a45; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #64748b; }
+.roster-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.roster-name { font-size: 12px; font-weight: 500; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.roster-pos { font-size: 10px; color: #475569; }
+
+.source-note { text-align: center; font-size: 11px; color: #334155; margin-top: 1.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <div class="brand-icon">🏈</div>
+    <div>
+      <div class="brand-name">TheRealSportsOpinion</div>
+      <div class="brand-sub">NFL Analytics Dashboard</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Leaderboards</a>
+    <a class="nav-link active" href="teams.html">Teams</a>
+  </div>
+  <span class="season-badge" id="season-badge">2025 Season</span>
+</header>
+
+<div class="hero">
+  <h1>NFL Team Standings</h1>
+  <p id="hero-sub">2025 regular season · Click any team for full breakdown</p>
+</div>
+
+<div class="conf-tabs">
+  <button class="conf-tab active" onclick="showConf('AFC', this)">AFC</button>
+  <button class="conf-tab" onclick="showConf('NFC', this)">NFC</button>
+  <button class="conf-tab" onclick="showConf('ALL', this)">All Teams</button>
+</div>
+
+<div class="standings-wrap" id="standings-wrap">
+  <div style="text-align:center;padding:3rem;color:#475569">Loading team data...</div>
+</div>
+
+<!-- Team Modal -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="team-hero" id="team-hero"></div>
+    <div class="modal-tabs">
+      <button class="modal-tab active" onclick="showModalTab('stats', this)">Stats</button>
+      <button class="modal-tab" onclick="showModalTab('schedule', this)">Schedule</button>
+      <button class="modal-tab" onclick="showModalTab('roster', this)">Roster</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const AFC = {
+  'AFC East': ['BUF','MIA','NE','NYJ'],
+  'AFC North': ['BAL','CIN','CLE','PIT'],
+  'AFC South': ['HOU','IND','JAX','TEN'],
+  'AFC West': ['DEN','KC','LV','LAC']
+};
+const NFC = {
+  'NFC East': ['DAL','NYG','PHI','WAS'],
+  'NFC North': ['CHI','DET','GB','MIN'],
+  'NFC South': ['ATL','CAR','NO','TB'],
+  'NFC West': ['ARI','LA','LAR','SF','SEA']
+};
+
+const TEAM_NAMES = {
+  ARI:'Arizona Cardinals',ATL:'Atlanta Falcons',BAL:'Baltimore Ravens',BUF:'Buffalo Bills',
+  CAR:'Carolina Panthers',CHI:'Chicago Bears',CIN:'Cincinnati Bengals',CLE:'Cleveland Browns',
+  DAL:'Dallas Cowboys',DEN:'Denver Broncos',DET:'Detroit Lions',GB:'Green Bay Packers',
+  HOU:'Houston Texans',IND:'Indianapolis Colts',JAX:'Jacksonville Jaguars',KC:'Kansas City Chiefs',
+  LA:'Los Angeles Rams',LAC:'Los Angeles Chargers',LAR:'Los Angeles Rams',LV:'Las Vegas Raiders',
+  MIA:'Miami Dolphins',MIN:'Minnesota Vikings',NE:'New England Patriots',NO:'New Orleans Saints',
+  NYG:'New York Giants',NYJ:'New York Jets',PHI:'Philadelphia Eagles',PIT:'Pittsburgh Steelers',
+  SEA:'Seattle Seahawks',SF:'San Francisco 49ers',TB:'Tampa Bay Buccaneers',TEN:'Tennessee Titans',
+  WAS:'Washington Commanders'
+};
+
+let allData = null;
+let currentConf = 'AFC';
+let currentTeamData = null;
+let currentModalTab = 'stats';
+
+function proxyUrl(url) {
+  if (!url) return null;
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=60&h=60&fit=cover`;
+}
+
+function initials(name) {
+  return name.split(' ').filter(p => p.length > 1).map(p => p[0]).join('').slice(0,2).toUpperCase();
+}
+
+function pct(w, l, t) {
+  const g = w + l + t;
+  return g > 0 ? (w / g).toFixed(3).replace(/^0/, '') : '.000';
+}
+
+function getDivisions(conf) {
+  if (conf === 'AFC') return AFC;
+  if (conf === 'NFC') return NFC;
+  const all = {};
+  Object.assign(all, AFC, NFC);
+  return all;
+}
+
+function buildStandings(conf) {
+  if (!allData) return;
+  const divs = getDivisions(conf);
+  let html = '';
+  for (const [divName, teams] of Object.entries(divs)) {
+    const divTeams = teams
+      .map(t => allData.teams[t])
+      .filter(Boolean)
+      .sort((a, b) => {
+        const wa = a.wins / Math.max(a.wins+a.losses+a.ties,1);
+        const wb = b.wins / Math.max(b.wins+b.losses+b.ties,1);
+        return wb - wa;
+      });
+    if (divTeams.length === 0) continue;
+    const maxWins = Math.max(...divTeams.map(t => t.wins), 1);
+    html += `<div class="division-section">
+      <div class="division-title">${divName}</div>
+      <div class="standings-table">
+        <div class="standings-header">
+          <span>#</span><span>Team</span><span>Record</span><span>PCT</span><span>PF</span><span>PA</span><span>DIFF</span>
+        </div>`;
+    divTeams.forEach((t, i) => {
+      const diff = t.points_for - t.points_against;
+      const diffStr = diff > 0 ? `+${diff}` : `${diff}`;
+      const diffClass = diff > 0 ? 'pts-pos' : diff < 0 ? 'pts-neg' : '';
+      html += `<div class="team-row" onclick="openTeam('${t.team}')">
+        <span class="team-rank">${i+1}</span>
+        <div class="team-info">
+          <div class="team-logo">${t.team}</div>
+          <div class="team-name">${TEAM_NAMES[t.team] || t.team}</div>
+        </div>
+        <div class="record">${t.wins}-${t.losses}${t.ties > 0 ? '-'+t.ties : ''}</div>
+        <div class="pct">${pct(t.wins, t.losses, t.ties)}</div>
+        <div class="pts">${t.points_for}</div>
+        <div class="pts">${t.points_against}</div>
+        <div class="pts ${diffClass}">${diffStr}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  }
+  document.getElementById('standings-wrap').innerHTML = html + `<div class="source-note">Data: nflreadpy · Built by Trevor Waz · MS Analytics candidate, TLU</div>`;
+}
+
+function showConf(conf, btn) {
+  currentConf = conf;
+  document.querySelectorAll('.conf-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildStandings(conf);
+}
+
+function openTeam(teamAbbr) {
+  const t = allData.teams[teamAbbr];
+  if (!t) return;
+  currentTeamData = t;
+  const name = TEAM_NAMES[teamAbbr] || teamAbbr;
+  const diff = t.points_for - t.points_against;
+  const diffStr = diff >= 0 ? `+${diff}` : `${diff}`;
+  document.getElementById('team-hero').innerHTML = `
+    <div class="team-hero-top">
+      <div class="team-logo-lg">${teamAbbr}</div>
+      <div>
+        <div class="team-hero-name">${name}</div>
+        <div class="team-hero-meta">${teamAbbr} · 2025 NFL Season</div>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-val">${t.wins}-${t.losses}${t.ties>0?'-'+t.ties:''}</div><div class="hero-stat-lbl">Record</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">${t.points_for}</div><div class="hero-stat-lbl">Points For</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">${t.points_against}</div><div class="hero-stat-lbl">Points Against</div></div>
+      <div class="hero-stat"><div class="hero-stat-val">${diffStr}</div><div class="hero-stat-lbl">Differential</div></div>
+    </div>`;
+  document.querySelectorAll('.modal-tab').forEach(b => b.classList.remove('active'));
+  document.querySelector('.modal-tab').classList.add('active');
+  currentModalTab = 'stats';
+  renderModalTab('stats');
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showModalTab(tab, btn) {
+  currentModalTab = tab;
+  document.querySelectorAll('.modal-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderModalTab(tab);
+}
+
+function renderModalTab(tab) {
+  const t = currentTeamData;
+  const body = document.getElementById('modal-body');
+  if (tab === 'stats') {
+    const s = t.stats || {};
+    const tp = t.top_players || {};
+    let topHtml = '';
+    if (tp.top_passer) topHtml += `<div class="top-player-row"><div><span class="top-player-pos">QB</span><span class="top-player-name">${tp.top_passer.name}</span></div><span class="top-player-stat">${tp.top_passer.yards.toLocaleString()} yds</span></div>`;
+    if (tp.top_rusher) topHtml += `<div class="top-player-row"><div><span class="top-player-pos">RB</span><span class="top-player-name">${tp.top_rusher.name}</span></div><span class="top-player-stat">${tp.top_rusher.yards.toLocaleString()} yds</span></div>`;
+    if (tp.top_receiver) topHtml += `<div class="top-player-row"><div><span class="top-player-pos">WR</span><span class="top-player-name">${tp.top_receiver.name}</span></div><span class="top-player-stat">${tp.top_receiver.yards.toLocaleString()} yds</span></div>`;
+    body.innerHTML = `
+      <div class="stats-grid">
+        <div class="stat-box"><div class="stat-box-val">${(s.passing_yards||0).toLocaleString()}</div><div class="stat-box-lbl">Pass Yards</div></div>
+        <div class="stat-box"><div class="stat-box-val">${(s.passing_tds||0)}</div><div class="stat-box-lbl">Pass TDs</div></div>
+        <div class="stat-box"><div class="stat-box-val">${(s.rushing_yards||0).toLocaleString()}</div><div class="stat-box-lbl">Rush Yards</div></div>
+        <div class="stat-box"><div class="stat-box-val">${(s.rushing_tds||0)}</div><div class="stat-box-lbl">Rush TDs</div></div>
+        <div class="stat-box"><div class="stat-box-val">${(s.def_sacks||0)}</div><div class="stat-box-lbl">Sacks</div></div>
+        <div class="stat-box"><div class="stat-box-val">${(s.def_interceptions||0)}</div><div class="stat-box-lbl">Interceptions</div></div>
+      </div>
+      ${topHtml ? `<div class="top-players-section"><div class="section-label">Top performers</div>${topHtml}</div>` : ''}`;
+  } else if (tab === 'schedule') {
+    const games = t.schedule || [];
+    const schedHtml = games.map(g => {
+      const isPlayoff = g.game_type && g.game_type !== 'REG';
+      const haLabel = g.home ? 'vs' : '@';
+      let resultHtml = '';
+      if (g.played && g.result) {
+        const cls = g.result === 'W' ? 'result-w' : g.result === 'L' ? 'result-l' : 'result-t';
+        resultHtml = `<span class="${cls}">${g.result} ${g.team_score}-${g.opp_score}</span>`;
+      } else {
+        resultHtml = `<span class="result-tbd">TBD</span>`;
+      }
+      return `<div class="sched-row">
+        <span class="sched-week">Wk ${g.week}</span>
+        <span class="sched-ha">${haLabel}</span>
+        <span class="sched-opp">${g.opponent}${isPlayoff ? '<span class="playoff-label">POST</span>' : ''}</span>
+        <span class="sched-result">${resultHtml}</span>
+      </div>`;
+    }).join('');
+    body.innerHTML = schedHtml || '<div style="text-align:center;padding:2rem;color:#475569">No schedule data available.</div>';
+  } else if (tab === 'roster') {
+    const roster = (t.roster || []).slice(0, 60);
+    const rosterHtml = roster.map(p => {
+      const init = initials(p.name);
+      return `<div class="roster-card">
+        <span class="roster-num">#${p.number}</span>
+        <div class="roster-avatar" id="ra-${p.name.replace(/\s/g,'_')}">
+          <span>${init}</span>
+        </div>
+        <div>
+          <div class="roster-name">${p.name}</div>
+          <div class="roster-pos">${p.position}</div>
+        </div>
+      </div>`;
+    }).join('');
+    body.innerHTML = `<div class="roster-grid">${rosterHtml}</div>`;
+    roster.forEach(p => {
+      const el = document.getElementById(`ra-${p.name.replace(/\s/g,'_')}`);
+      if (el && p.headshot) {
+        const src = proxyUrl(p.headshot);
+        const img = new Image();
+        img.onload = () => { el.innerHTML = ''; img.style.cssText='width:100%;height:100%;object-fit:cover;border-radius:50%'; el.appendChild(img); };
+        img.src = src;
+      }
+    });
+  }
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+async function loadData() {
+  try {
+    const res = await fetch('teams.json');
+    if (!res.ok) throw new Error('No teams.json');
+    allData = await res.json();
+    document.getElementById('season-badge').textContent = `${allData.season} Season`;
+    buildStandings('AFC');
+  } catch(e) {
+    document.getElementById('standings-wrap').innerHTML = `<div style="text-align:center;padding:3rem;color:#f87171">Could not load team data. Run export_teams.py first.</div>`;
+  }
+}
+
+loadData();
+</script>
+</body>
+</html>
