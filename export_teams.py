@@ -8,6 +8,7 @@ print(f"Loading team data for {current_season}...")
 team_stats = nfl.load_team_stats([current_season])
 schedules = nfl.load_schedules([current_season])
 roster = nfl.load_rosters([current_season])
+<<<<<<< HEAD
 
 reg_team = team_stats.filter(pl.col("season_type") == "REG")
 reg_sched = schedules.filter(pl.col("game_type") == "REG")
@@ -15,6 +16,15 @@ post_sched = schedules.filter(pl.col("game_type") != "REG")
 
 all_teams = reg_team["team"].unique().to_list()
 all_teams.sort()
+=======
+player_stats = nfl.load_player_stats([current_season])
+
+reg_team = team_stats.filter(pl.col("season_type") == "REG")
+reg_sched = schedules.filter(pl.col("game_type") == "REG")
+reg_player = player_stats.filter(pl.col("season_type") == "REG")
+
+all_teams = sorted(reg_team["team"].unique().to_list())
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
 
 def get_team_record(team, sched):
     home = sched.filter(pl.col("home_team") == team).select(["home_score","away_score"]).to_dicts()
@@ -47,7 +57,12 @@ def get_team_schedule(team, sched):
             result = "W" if g["home_score"] > g["away_score"] else "L" if g["home_score"] < g["away_score"] else "T"
         games.append({"week": g["week"], "home": True, "opponent": g["away_team"],
                       "team_score": g["home_score"], "opp_score": g["away_score"],
+<<<<<<< HEAD
                       "result": result, "played": played, "stadium": g["stadium"] or ""})
+=======
+                      "result": result, "played": played, "stadium": g["stadium"] or "",
+                      "game_type": g["game_type"] or "REG"})
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
     for g in away_games:
         played = g["away_score"] is not None
         result = None
@@ -55,19 +70,31 @@ def get_team_schedule(team, sched):
             result = "W" if g["away_score"] > g["home_score"] else "L" if g["away_score"] < g["home_score"] else "T"
         games.append({"week": g["week"], "home": False, "opponent": g["home_team"],
                       "team_score": g["away_score"], "opp_score": g["home_score"],
+<<<<<<< HEAD
                       "result": result, "played": played, "stadium": g["stadium"] or ""})
+=======
+                      "result": result, "played": played, "stadium": g["stadium"] or "",
+                      "game_type": g["game_type"] or "REG"})
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
     games.sort(key=lambda x: x["week"])
     return games
 
 def get_team_stats(team, df):
     t = df.filter(pl.col("team") == team)
+<<<<<<< HEAD
     if len(t) == 0: return {}
+=======
+    if t.is_empty(): return {}
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
     return {
         "passing_yards": int(t["passing_yards"].sum()),
         "passing_tds": int(t["passing_tds"].sum()),
         "rushing_yards": int(t["rushing_yards"].sum()),
         "rushing_tds": int(t["rushing_tds"].sum()),
+<<<<<<< HEAD
         "receiving_yards": int(t["receiving_yards"].sum()),
+=======
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
         "def_sacks": int(t["def_sacks"].sum()),
         "def_interceptions": int(t["def_interceptions"].sum()),
         "passing_interceptions": int(t["passing_interceptions"].sum()),
@@ -75,6 +102,7 @@ def get_team_stats(team, df):
 
 def get_top_players(team, df):
     t = df.filter(pl.col("team") == team)
+<<<<<<< HEAD
     passers = t.group_by("player_display_name").agg(pl.col("passing_yards").sum()).sort("passing_yards", descending=True).head(1)
     rushers = t.group_by("player_display_name").agg(pl.col("rushing_yards").sum()).sort("rushing_yards", descending=True).head(1)
     receivers = t.group_by("player_display_name").agg(pl.col("receiving_yards").sum()).sort("receiving_yards", descending=True).head(1)
@@ -90,6 +118,20 @@ def get_top_players(team, df):
 player_stats = nfl.load_player_stats([current_season])
 reg_player = player_stats.filter(pl.col("season_type") == "REG")
 
+=======
+    result = {}
+    passers = t.group_by("player_display_name").agg(pl.col("passing_yards").sum()).sort("passing_yards", descending=True).head(1).to_dicts()
+    rushers = t.group_by("player_display_name").agg(pl.col("rushing_yards").sum()).sort("rushing_yards", descending=True).head(1).to_dicts()
+    receivers = t.group_by("player_display_name").agg(pl.col("receiving_yards").sum()).sort("receiving_yards", descending=True).head(1).to_dicts()
+    if passers and passers[0]["passing_yards"] > 0:
+        result["top_passer"] = {"name": passers[0]["player_display_name"], "yards": int(passers[0]["passing_yards"])}
+    if rushers and rushers[0]["rushing_yards"] > 0:
+        result["top_rusher"] = {"name": rushers[0]["player_display_name"], "yards": int(rushers[0]["rushing_yards"])}
+    if receivers and receivers[0]["receiving_yards"] > 0:
+        result["top_receiver"] = {"name": receivers[0]["player_display_name"], "yards": int(receivers[0]["receiving_yards"])}
+    return result
+
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
 headshots = roster.select(["full_name","team","headshot_url"]).unique(subset=["full_name","team"])
 
 teams_data = {}
@@ -121,6 +163,10 @@ with open('/Users/trevorwaz/TheRealSportsOpinion/teams.json', 'w') as f:
     json.dump({"season": int(current_season), "teams": teams_data}, f, indent=2)
 
 print(f"Done! {len(teams_data)} teams exported.")
+<<<<<<< HEAD
 for t in list(teams_data.keys())[:3]:
+=======
+for t in list(teams_data.keys())[:5]:
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
     d = teams_data[t]
     print(f"  {t}: {d['wins']}-{d['losses']} | PF:{d['points_for']} PA:{d['points_against']}")

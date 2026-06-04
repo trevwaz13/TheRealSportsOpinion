@@ -191,6 +191,7 @@ function initials(name) {
 function rankLabel(i) { return i === 0 ? '🥇 1st' : i === 1 ? '🥈 2nd' : i === 2 ? '🥉 3rd' : `${i+1}th`; }
 function rankClass(i) { return i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''; }
 
+<<<<<<< HEAD
 // UPDATED: reads headshot directly from the player object
 function loadHeadshot(player, el) {
   if (player.headshot) {
@@ -205,10 +206,32 @@ function loadHeadshot(player, el) {
   }
 }
 
+=======
+// Route through wsrv.nl proxy to bypass CORS on GitHub Pages
+function proxyUrl(url) {
+  if (!url) return null;
+  return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=130&h=130&fit=cover`;
+}
+
+function loadHeadshot(player, el) {
+  const src = proxyUrl(player.headshot);
+  if (!src) return;
+  const img = new Image();
+  img.onload = () => {
+    el.innerHTML = '';
+    el.appendChild(img);
+  };
+  img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%';
+  img.alt = player.name;
+  img.src = src;
+}
+
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
 function loadModalHeadshot(player, wrap) {
   const [bg, fg] = avatarColors[currentModalRank % avatarColors.length];
   wrap.style.background = bg;
   wrap.innerHTML = `<div class="modal-headshot-initials" style="color:${fg}">${initials(player.name)}</div>`;
+<<<<<<< HEAD
   if (player.headshot) {
     const img = new Image();
     img.onload = () => {
@@ -219,6 +242,18 @@ function loadModalHeadshot(player, wrap) {
     };
     img.src = player.headshot;
   }
+=======
+  const src = proxyUrl(player.headshot);
+  if (!src) return;
+  const img = new Image();
+  img.onload = () => {
+    wrap.innerHTML = '';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center';
+    img.alt = player.name;
+    wrap.appendChild(img);
+  };
+  img.src = src;
+>>>>>>> e3f5026252e1d0f7e0526143ec32cca8d7dd3411
 }
 
 function buildRows(players, category, color, seasonMode) {

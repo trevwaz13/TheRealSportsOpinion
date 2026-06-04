@@ -7,6 +7,9 @@ current_week = nfl.get_current_week()
 print(f"Loading season {current_season}, week {current_week}...")
 
 stats = nfl.load_player_stats([current_season])
+roster = nfl.load_rosters([current_season])
+
+headshots = roster.select(['full_name', 'team', 'headshot_url', 'espn_id']).unique(subset=['full_name', 'team'])
 
 print("All rows:", stats.shape)
 
@@ -37,18 +40,33 @@ def build_leaderboards(df):
         pl.col('targets').sum(),
     ]).sort('receiving_yards', descending=True).head(10)
 
+    def add_headshot(df_top, yard_col):
+        joined = df_top.join(
+            headshots.rename({'full_name': 'player_display_name'}),
+            on=['player_display_name', 'team'],
+            how='left'
+        )
+        return joined
+
+    top_pass = add_headshot(top_pass, 'passing_yards')
+    top_rush = add_headshot(top_rush, 'rushing_yards')
+    top_rec = add_headshot(top_rec, 'receiving_yards')
+
     return {
         "passers": [{"name": r['player_display_name'], "team": r['team'],
                      "yards": int(r['passing_yards']), "tds": int(r['passing_tds']),
-                     "completions": int(r['completions']), "attempts": int(r['attempts'])}
+                     "completions": int(r['completions']), "attempts": int(r['attempts']),
+                     "headshot": r['headshot_url'] or ""}
                     for r in top_pass.to_dicts()],
         "rushers": [{"name": r['player_display_name'], "team": r['team'],
                      "yards": int(r['rushing_yards']), "tds": int(r['rushing_tds']),
-                     "carries": int(r['carries'])}
+                     "carries": int(r['carries']),
+                     "headshot": r['headshot_url'] or ""}
                     for r in top_rush.to_dicts()],
         "receivers": [{"name": r['player_display_name'], "team": r['team'],
                        "yards": int(r['receiving_yards']), "tds": int(r['receiving_tds']),
-                       "receptions": int(r['receptions']), "targets": int(r['targets'])}
+                       "receptions": int(r['receptions']), "targets": int(r['targets']),
+                       "headshot": r['headshot_url'] or ""}
                       for r in top_rec.to_dicts()]
     }
 
@@ -74,8 +92,5 @@ with open('/Users/trevorwaz/TheRealSportsOpinion/data.json', 'w') as f:
     json.dump(data, f, indent=2)
 
 print(f"Done! Season {current_season} exported.")
-print(f"Regular season through week {last_reg_week}")
-print(f"Playoffs: {'Yes' if data['has_playoffs'] else 'No data yet'}")
-print(f"Top passer (reg):   {reg_data['passers'][0]['name']} - {reg_data['passers'][0]['yards']} yds, {reg_data['passers'][0]['tds']} TDs")
-print(f"Top rusher (reg):   {reg_data['rushers'][0]['name']} - {reg_data['rushers'][0]['yards']} yds, {reg_data['rushers'][0]['tds']} TDs")
-print(f"Top receiver (reg): {reg_data['receivers'][0]['name']} - {reg_data['receivers'][0]['yards']} yds, {reg_data['receivers'][0]['tds']} TDs")
+print(f"Top passer: {reg_data['passers'][0]['name']} - {reg_data['passers'][0]['yards']} yds")
+print(f"Headshot: {reg_data['passers'][0]['headshot']}")

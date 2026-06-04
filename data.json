@@ -1,160 +1,542 @@
 {
   "season": 2025,
-  "week": 22,
-  "passers": [
-    {
-      "name": "Matthew Stafford",
-      "team": "LA",
-      "yards": 5643
-    },
-    {
-      "name": "Drake Maye",
-      "team": "NE",
-      "yards": 5222
-    },
-    {
-      "name": "Sam Darnold",
-      "team": "SEA",
-      "yards": 4720
-    },
-    {
-      "name": "Jared Goff",
-      "team": "DET",
-      "yards": 4564
-    },
-    {
-      "name": "Caleb Williams",
-      "team": "CHI",
-      "yards": 4560
-    },
-    {
-      "name": "Dak Prescott",
-      "team": "DAL",
-      "yards": 4552
-    },
-    {
-      "name": "Josh Allen",
-      "team": "BUF",
-      "yards": 4224
-    },
-    {
-      "name": "Trevor Lawrence",
-      "team": "JAX",
-      "yards": 4214
-    },
-    {
-      "name": "Bo Nix",
-      "team": "DEN",
-      "yards": 4210
-    },
-    {
-      "name": "Justin Herbert",
-      "team": "LAC",
-      "yards": 3886
-    }
-  ],
-  "rushers": [
-    {
-      "name": "James Cook",
-      "team": "BUF",
-      "yards": 1784
-    },
-    {
-      "name": "Derrick Henry",
-      "team": "BAL",
-      "yards": 1595
-    },
-    {
-      "name": "Jonathan Taylor",
-      "team": "IND",
-      "yards": 1585
-    },
-    {
-      "name": "Bijan Robinson",
-      "team": "ATL",
-      "yards": 1478
-    },
-    {
-      "name": "Kyren Williams",
-      "team": "LA",
-      "yards": 1435
-    },
-    {
-      "name": "De'Von Achane",
-      "team": "MIA",
-      "yards": 1350
-    },
-    {
-      "name": "Kenneth Walker III",
-      "team": "SEA",
-      "yards": 1340
-    },
-    {
-      "name": "Christian McCaffrey",
-      "team": "SF",
-      "yards": 1285
-    },
-    {
-      "name": "Saquon Barkley",
-      "team": "PHI",
-      "yards": 1246
-    },
-    {
-      "name": "Jahmyr Gibbs",
-      "team": "DET",
-      "yards": 1223
-    }
-  ],
-  "receivers": [
-    {
-      "name": "Puka Nacua",
-      "team": "LA",
-      "yards": 2047
-    },
-    {
-      "name": "Jaxon Smith-Njigba",
-      "team": "SEA",
-      "yards": 1992
-    },
-    {
-      "name": "George Pickens",
-      "team": "DAL",
-      "yards": 1429
-    },
-    {
-      "name": "Ja'Marr Chase",
-      "team": "CIN",
-      "yards": 1412
-    },
-    {
-      "name": "Amon-Ra St. Brown",
-      "team": "DET",
-      "yards": 1401
-    },
-    {
-      "name": "Trey McBride",
-      "team": "ARI",
-      "yards": 1239
-    },
-    {
-      "name": "Zay Flowers",
-      "team": "BAL",
-      "yards": 1211
-    },
-    {
-      "name": "Chris Olave",
-      "team": "NO",
-      "yards": 1163
-    },
-    {
-      "name": "Nico Collins",
-      "team": "HOU",
-      "yards": 1138
-    },
-    {
-      "name": "Stefon Diggs",
-      "team": "NE",
-      "yards": 1123
-    }
-  ]
+  "regular_season_week": 18,
+  "playoff_week": 22,
+  "has_playoffs": true,
+  "regular": {
+    "passers": [
+      {
+        "name": "Matthew Stafford",
+        "team": "LA",
+        "yards": 4707,
+        "tds": 46,
+        "completions": 388,
+        "attempts": 597,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/svxl2pk2cuqf26zrhii4"
+      },
+      {
+        "name": "Jared Goff",
+        "team": "DET",
+        "yards": 4564,
+        "tds": 34,
+        "completions": 393,
+        "attempts": 578,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/yggfwr4ak4po9byj0qor"
+      },
+      {
+        "name": "Dak Prescott",
+        "team": "DAL",
+        "yards": 4552,
+        "tds": 30,
+        "completions": 404,
+        "attempts": 600,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/blixemm3s9sa4gmqk5yn"
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 4394,
+        "tds": 31,
+        "completions": 354,
+        "attempts": 492,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/oyap81gtzcvnfmripis1"
+      },
+      {
+        "name": "Sam Darnold",
+        "team": "SEA",
+        "yards": 4048,
+        "tds": 25,
+        "completions": 323,
+        "attempts": 477,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/s5t8m6bhedjwwtfw3ild"
+      },
+      {
+        "name": "Trevor Lawrence",
+        "team": "JAX",
+        "yards": 4007,
+        "tds": 29,
+        "completions": 341,
+        "attempts": 560,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/d75srntioly7fq0z8vip"
+      },
+      {
+        "name": "Caleb Williams",
+        "team": "CHI",
+        "yards": 3942,
+        "tds": 27,
+        "completions": 330,
+        "attempts": 568,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/h4qs11kutwiw7whekmyt"
+      },
+      {
+        "name": "Bo Nix",
+        "team": "DEN",
+        "yards": 3931,
+        "tds": 25,
+        "completions": 388,
+        "attempts": 612,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/igirshmrr6lqtxcpxsea"
+      },
+      {
+        "name": "Justin Herbert",
+        "team": "LAC",
+        "yards": 3727,
+        "tds": 26,
+        "completions": 340,
+        "attempts": 512,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/s1oelyaroiaalgilbeqk"
+      },
+      {
+        "name": "Baker Mayfield",
+        "team": "TB",
+        "yards": 3693,
+        "tds": 26,
+        "completions": 343,
+        "attempts": 543,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/i2uufyghiphx4oihgucm"
+      }
+    ],
+    "rushers": [
+      {
+        "name": "James Cook",
+        "team": "BUF",
+        "yards": 1621,
+        "tds": 12,
+        "carries": 309,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/anjbznqb9i21wzcgrtbs"
+      },
+      {
+        "name": "Derrick Henry",
+        "team": "BAL",
+        "yards": 1595,
+        "tds": 16,
+        "carries": 307,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jxtikemnvpkw9r0ex2wv"
+      },
+      {
+        "name": "Jonathan Taylor",
+        "team": "IND",
+        "yards": 1585,
+        "tds": 18,
+        "carries": 323,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/uwmnrhwtwug0wrgkomjk"
+      },
+      {
+        "name": "Bijan Robinson",
+        "team": "ATL",
+        "yards": 1478,
+        "tds": 7,
+        "carries": 287,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/rjaf9auhx3lrktzgwpfb"
+      },
+      {
+        "name": "De'Von Achane",
+        "team": "MIA",
+        "yards": 1350,
+        "tds": 8,
+        "carries": 238,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xk1xwio0bryfxo1ylweu"
+      },
+      {
+        "name": "Kyren Williams",
+        "team": "LA",
+        "yards": 1252,
+        "tds": 10,
+        "carries": 259,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/smsyrjrwy0lf0hu9hkvg"
+      },
+      {
+        "name": "Jahmyr Gibbs",
+        "team": "DET",
+        "yards": 1223,
+        "tds": 13,
+        "carries": 243,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hjxk3judytgsxkqiilre"
+      },
+      {
+        "name": "Christian McCaffrey",
+        "team": "SF",
+        "yards": 1202,
+        "tds": 10,
+        "carries": 311,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/resjdwihunsqckohcorj"
+      },
+      {
+        "name": "Javonte Williams",
+        "team": "DAL",
+        "yards": 1201,
+        "tds": 11,
+        "carries": 252,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/hwzske22c4wrlf27qrih"
+      },
+      {
+        "name": "Saquon Barkley",
+        "team": "PHI",
+        "yards": 1140,
+        "tds": 7,
+        "carries": 280,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ern1nbhivkmwkg82c7v1"
+      }
+    ],
+    "receivers": [
+      {
+        "name": "Jaxon Smith-Njigba",
+        "team": "SEA",
+        "yards": 1793,
+        "tds": 10,
+        "receptions": 119,
+        "targets": 163,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jpvhsregfvw46mlyckzj"
+      },
+      {
+        "name": "Puka Nacua",
+        "team": "LA",
+        "yards": 1715,
+        "tds": 10,
+        "receptions": 129,
+        "targets": 166,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zvi4hdm6fywcekfe7ceb"
+      },
+      {
+        "name": "George Pickens",
+        "team": "DAL",
+        "yards": 1429,
+        "tds": 9,
+        "receptions": 93,
+        "targets": 137,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/cbpyykoguf7rsxezqzvk"
+      },
+      {
+        "name": "Ja'Marr Chase",
+        "team": "CIN",
+        "yards": 1412,
+        "tds": 8,
+        "receptions": 125,
+        "targets": 185,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qya3dtjb5kgofcuj2tuw"
+      },
+      {
+        "name": "Amon-Ra St. Brown",
+        "team": "DET",
+        "yards": 1401,
+        "tds": 11,
+        "receptions": 117,
+        "targets": 172,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/fd8nwhm6pvxfyzphzl6i"
+      },
+      {
+        "name": "Trey McBride",
+        "team": "ARI",
+        "yards": 1239,
+        "tds": 11,
+        "receptions": 126,
+        "targets": 169,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vd7av3vdfs6q7ncjogac"
+      },
+      {
+        "name": "Zay Flowers",
+        "team": "BAL",
+        "yards": 1211,
+        "tds": 5,
+        "receptions": 86,
+        "targets": 118,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/sqqh8gmxdpo55qwpsszj"
+      },
+      {
+        "name": "Chris Olave",
+        "team": "NO",
+        "yards": 1163,
+        "tds": 9,
+        "receptions": 100,
+        "targets": 156,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/vrrmyvpvujynckag9jop"
+      },
+      {
+        "name": "Nico Collins",
+        "team": "HOU",
+        "yards": 1117,
+        "tds": 6,
+        "receptions": 71,
+        "targets": 120,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/osmqyvmib3pssxi6cyic"
+      },
+      {
+        "name": "Jameson Williams",
+        "team": "DET",
+        "yards": 1117,
+        "tds": 7,
+        "receptions": 65,
+        "targets": 102,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gpjarmglg1jhwq5wr1uu"
+      }
+    ]
+  },
+  "playoffs": {
+    "passers": [
+      {
+        "name": "Matthew Stafford",
+        "team": "LA",
+        "yards": 936,
+        "tds": 6,
+        "completions": 66,
+        "attempts": 119,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/svxl2pk2cuqf26zrhii4"
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 828,
+        "tds": 6,
+        "completions": 70,
+        "attempts": 120,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/oyap81gtzcvnfmripis1"
+      },
+      {
+        "name": "Sam Darnold",
+        "team": "SEA",
+        "yards": 672,
+        "tds": 5,
+        "completions": 56,
+        "attempts": 91,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/s5t8m6bhedjwwtfw3ild"
+      },
+      {
+        "name": "Caleb Williams",
+        "team": "CHI",
+        "yards": 618,
+        "tds": 4,
+        "completions": 47,
+        "attempts": 90,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/h4qs11kutwiw7whekmyt"
+      },
+      {
+        "name": "Josh Allen",
+        "team": "BUF",
+        "yards": 556,
+        "tds": 4,
+        "completions": 53,
+        "attempts": 74,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/servs1fpsynfxep4rz2z"
+      },
+      {
+        "name": "C.J. Stroud",
+        "team": "HOU",
+        "yards": 462,
+        "tds": 2,
+        "completions": 41,
+        "attempts": 79,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tt4zrtxlhifaljhj0rn7"
+      },
+      {
+        "name": "Brock Purdy",
+        "team": "SF",
+        "yards": 402,
+        "tds": 2,
+        "completions": 33,
+        "attempts": 58,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/xykdxnvxpf9pobxvkjfj"
+      },
+      {
+        "name": "Jordan Love",
+        "team": "GB",
+        "yards": 323,
+        "tds": 4,
+        "completions": 24,
+        "attempts": 46,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/uneiwen9drvci9ahuebp"
+      },
+      {
+        "name": "Bo Nix",
+        "team": "DEN",
+        "yards": 279,
+        "tds": 3,
+        "completions": 26,
+        "attempts": 46,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/igirshmrr6lqtxcpxsea"
+      },
+      {
+        "name": "Bryce Young",
+        "team": "CAR",
+        "yards": 264,
+        "tds": 1,
+        "completions": 21,
+        "attempts": 40,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qy1lfhlzhiacsyzzm1j7"
+      }
+    ],
+    "rushers": [
+      {
+        "name": "Kenneth Walker III",
+        "team": "SEA",
+        "yards": 313,
+        "tds": 4,
+        "carries": 65,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mnzsnemdzbey5hbahdhk"
+      },
+      {
+        "name": "Rhamondre Stevenson",
+        "team": "NE",
+        "yards": 217,
+        "tds": 0,
+        "carries": 58,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ed09migntlyy8ntgvcu1"
+      },
+      {
+        "name": "Kyren Williams",
+        "team": "LA",
+        "yards": 183,
+        "tds": 2,
+        "carries": 44,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/smsyrjrwy0lf0hu9hkvg"
+      },
+      {
+        "name": "Drake Maye",
+        "team": "NE",
+        "yards": 178,
+        "tds": 1,
+        "carries": 29,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/oyap81gtzcvnfmripis1"
+      },
+      {
+        "name": "James Cook",
+        "team": "BUF",
+        "yards": 163,
+        "tds": 0,
+        "carries": 39,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/anjbznqb9i21wzcgrtbs"
+      },
+      {
+        "name": "D'Andre Swift",
+        "team": "CHI",
+        "yards": 130,
+        "tds": 1,
+        "carries": 32,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/owpmwzoilitcodc6cmxo"
+      },
+      {
+        "name": "Woody Marks",
+        "team": "HOU",
+        "yards": 129,
+        "tds": 1,
+        "carries": 33,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/pwvxisrnjitkkghkfcn3"
+      },
+      {
+        "name": "Blake Corum",
+        "team": "LA",
+        "yards": 119,
+        "tds": 0,
+        "carries": 26,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/gytdgnrjj3jk8rlfxz85"
+      },
+      {
+        "name": "Saquon Barkley",
+        "team": "PHI",
+        "yards": 106,
+        "tds": 0,
+        "carries": 26,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/ern1nbhivkmwkg82c7v1"
+      },
+      {
+        "name": "Josh Allen",
+        "team": "BUF",
+        "yards": 99,
+        "tds": 2,
+        "carries": 23,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/servs1fpsynfxep4rz2z"
+      }
+    ],
+    "receivers": [
+      {
+        "name": "Puka Nacua",
+        "team": "LA",
+        "yards": 332,
+        "tds": 2,
+        "receptions": 24,
+        "targets": 42,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zvi4hdm6fywcekfe7ceb"
+      },
+      {
+        "name": "Jaxon Smith-Njigba",
+        "team": "SEA",
+        "yards": 199,
+        "tds": 2,
+        "receptions": 17,
+        "targets": 26,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/jpvhsregfvw46mlyckzj"
+      },
+      {
+        "name": "Colston Loveland",
+        "team": "CHI",
+        "yards": 193,
+        "tds": 0,
+        "receptions": 12,
+        "targets": 25,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/tyjb6vfug7gaunvcune3"
+      },
+      {
+        "name": "Davante Adams",
+        "team": "LA",
+        "yards": 185,
+        "tds": 1,
+        "receptions": 11,
+        "targets": 25,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/qtonvcqpixixqhc6lhnc"
+      },
+      {
+        "name": "Kayshon Boutte",
+        "team": "NE",
+        "yards": 168,
+        "tds": 1,
+        "receptions": 9,
+        "targets": 20,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/mg4icjqhwhnc5uobmau5"
+      },
+      {
+        "name": "Christian Kirk",
+        "team": "HOU",
+        "yards": 164,
+        "tds": 2,
+        "receptions": 10,
+        "targets": 15,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/bugikrmfz5k4jvyaogza"
+      },
+      {
+        "name": "Cooper Kupp",
+        "team": "SEA",
+        "yards": 157,
+        "tds": 1,
+        "receptions": 15,
+        "targets": 23,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/lpaxi9rsedlg9sdr5quw"
+      },
+      {
+        "name": "Khalil Shakir",
+        "team": "BUF",
+        "yards": 157,
+        "tds": 0,
+        "receptions": 19,
+        "targets": 21,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/otadttbhvkmavhsonnqm"
+      },
+      {
+        "name": "Marvin Mims Jr.",
+        "team": "DEN",
+        "yards": 155,
+        "tds": 1,
+        "receptions": 12,
+        "targets": 14,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/zbdjtph5xplbf4yocz0l"
+      },
+      {
+        "name": "Colby Parkinson",
+        "team": "LA",
+        "yards": 152,
+        "tds": 1,
+        "receptions": 8,
+        "targets": 14,
+        "headshot": "https://static.www.nfl.com/image/upload/f_auto,q_auto/league/b1qzivnz0zqa8cjgah8r"
+      }
+    ]
+  }
 }
