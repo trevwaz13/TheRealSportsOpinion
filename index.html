@@ -21,14 +21,12 @@ header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2r
 
 .data-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 11px; color: #1D9E75; background: #0a2a1e; border: 1px solid #0f3d2a; border-radius: 20px; padding: 5px 14px; width: fit-content; margin: 0 auto 1.5rem; }
 
-/* Tab row with toggle */
 .controls-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 2rem 1.5rem; flex-wrap: wrap; }
 .tabs { display: flex; gap: 8px; }
 .tab { padding: 7px 20px; border-radius: 8px; border: 1px solid #1e2a45; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
 .tab:hover { border-color: #2563eb; color: #93c5fd; }
 .tab.active { background: #2563eb; border-color: #2563eb; color: #fff; }
 
-/* Season toggle */
 .season-toggle { display: flex; background: #111827; border: 1px solid #1e2a45; border-radius: 8px; overflow: hidden; }
 .toggle-btn { padding: 5px 12px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.15s; white-space: nowrap; }
 .toggle-btn.active { background: #1e3a5f; color: #93c5fd; }
@@ -47,11 +45,13 @@ header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2r
 .rank.gold { color: #f59e0b; }
 .rank.silver { color: #94a3b8; }
 .rank.bronze { color: #b45309; }
+
 .player-info { display: flex; align-items: center; gap: 10px; }
-.avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; overflow: hidden; }
+.avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; overflow: hidden; border: 1.5px solid #1e2a45; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 .player-name { font-size: 13px; font-weight: 600; color: #f1f5f9; transition: color 0.1s; }
 .click-hint { font-size: 10px; color: #334155; }
+
 .stat-primary { font-size: 14px; font-weight: 700; color: #f1f5f9; }
 .stat-sm { font-size: 12px; color: #64748b; }
 .stat-bar { height: 3px; border-radius: 2px; background: #1e2a45; width: 80%; overflow: hidden; margin-top: 3px; }
@@ -65,15 +65,17 @@ header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2r
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
 .modal-overlay.open { display: flex; }
 .modal { background: #0d1221; border: 1px solid #1e2a45; border-radius: 20px; width: 92%; max-width: 460px; overflow: hidden; position: relative; }
-.modal-header { background: #111827; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #1e2a45; }
-.modal-headshot { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; }
-.modal-headshot img { width: 100%; height: 100%; object-fit: cover; }
-.modal-player-name { font-size: 18px; font-weight: 700; color: #f1f5f9; }
-.modal-player-meta { font-size: 12px; color: #64748b; margin-top: 3px; }
-.modal-close { position: absolute; top: 0.85rem; right: 0.85rem; background: #1e2a45; border: none; color: #94a3b8; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
-.modal-close:hover { background: #2e3f5c; color: #fff; }
 
-/* Modal season toggle */
+.modal-header { background: #111827; padding: 0; border-bottom: 1px solid #1e2a45; display: flex; align-items: stretch; min-height: 100px; }
+.modal-headshot-wrap { width: 100px; flex-shrink: 0; overflow: hidden; position: relative; background: #1e2a45; }
+.modal-headshot-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.modal-headshot-initials { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; }
+.modal-header-info { padding: 1.1rem 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.modal-player-name { font-size: 18px; font-weight: 700; color: #f1f5f9; margin-bottom: 4px; }
+.modal-player-meta { font-size: 12px; color: #64748b; }
+.modal-close { position: absolute; top: 0.75rem; right: 0.75rem; background: rgba(0,0,0,0.4); border: none; color: #94a3b8; width: 26px; height: 26px; border-radius: 50%; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.modal-close:hover { background: rgba(0,0,0,0.6); color: #fff; }
+
 .modal-toggle-wrap { display: flex; justify-content: center; padding: 0.85rem 1.5rem 0; }
 .modal-season-toggle { display: flex; background: #111827; border: 1px solid #1e2a45; border-radius: 8px; overflow: hidden; }
 .modal-toggle-btn { padding: 5px 16px; font-size: 11px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.15s; }
@@ -152,8 +154,8 @@ header { background: #0d1221; border-bottom: 1px solid #1e2a45; padding: 1rem 2r
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-header">
-      <div class="modal-headshot" id="modal-headshot"></div>
-      <div>
+      <div class="modal-headshot-wrap" id="modal-headshot-wrap"></div>
+      <div class="modal-header-info">
         <div class="modal-player-name" id="modal-name"></div>
         <div class="modal-player-meta" id="modal-meta"></div>
       </div>
@@ -189,20 +191,34 @@ function initials(name) {
 function rankLabel(i) { return i === 0 ? '🥇 1st' : i === 1 ? '🥈 2nd' : i === 2 ? '🥉 3rd' : `${i+1}th`; }
 function rankClass(i) { return i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : ''; }
 
-function getHeadshotUrl(name) {
-  const parts = name.split(' ');
-  if (parts.length < 2) return null;
-  const first = parts[0].toLowerCase().replace(/[^a-z]/g,'');
-  const last = parts[parts.length-1].toLowerCase().replace(/[^a-z]/g,'');
-  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${first}_${last}.png&w=130&h=100`;
+// UPDATED: reads headshot directly from the player object
+function loadHeadshot(player, el) {
+  if (player.headshot) {
+    const img = new Image();
+    img.onload = () => {
+      el.innerHTML = '';
+      el.appendChild(img);
+    };
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%';
+    img.alt = player.name;
+    img.src = player.headshot;
+  }
 }
 
-function tryLoadHeadshot(name, el) {
-  const url = getHeadshotUrl(name);
-  if (!url) return;
-  const img = new Image();
-  img.onload = () => { el.innerHTML = `<img src="${url}" alt="${name}">`; };
-  img.src = url;
+function loadModalHeadshot(player, wrap) {
+  const [bg, fg] = avatarColors[currentModalRank % avatarColors.length];
+  wrap.style.background = bg;
+  wrap.innerHTML = `<div class="modal-headshot-initials" style="color:${fg}">${initials(player.name)}</div>`;
+  if (player.headshot) {
+    const img = new Image();
+    img.onload = () => {
+      wrap.innerHTML = '';
+      img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center';
+      img.alt = player.name;
+      wrap.appendChild(img);
+    };
+    img.src = player.headshot;
+  }
 }
 
 function buildRows(players, category, color, seasonMode) {
@@ -217,7 +233,6 @@ function buildRows(players, category, color, seasonMode) {
     if (category === 'passing') extra = `${p.completions}/${p.attempts}`;
     else if (category === 'rushing') extra = `${p.carries} car`;
     else extra = `${p.receptions}/${p.targets}`;
-
     const pJson = encodeURIComponent(JSON.stringify(p));
     return `<div class="player-row" onclick="openModal('${pJson}','${category}',${i})">
       <span class="rank ${rankClass(i)}">${i+1}</span>
@@ -236,6 +251,16 @@ function buildRows(players, category, color, seasonMode) {
   }).join('');
 }
 
+function loadAllAvatars(src) {
+  ['passers','rushers','receivers'].forEach(cat => {
+    const short = cat === 'passers' ? 'passing' : cat === 'rushers' ? 'rushing' : 'receiving';
+    (src[cat] || []).forEach((p, i) => {
+      const el = document.getElementById(`av-${currentSeason}-${short}-${i}`);
+      if (el) loadHeadshot(p, el);
+    });
+  });
+}
+
 function renderBoards() {
   if (!allData) return;
   const src = currentSeason === 'regular' ? allData.regular : allData.playoffs;
@@ -244,16 +269,6 @@ function renderBoards() {
   document.getElementById('rushing-rows').innerHTML = buildRows(src.rushers, 'rushing', color.rushing, currentSeason);
   document.getElementById('receiving-rows').innerHTML = buildRows(src.receivers, 'receiving', color.receiving, currentSeason);
   loadAllAvatars(src);
-}
-
-function loadAllAvatars(src) {
-  ['passers','rushers','receivers'].forEach(cat => {
-    const short = cat === 'passers' ? 'passing' : cat === 'rushers' ? 'rushing' : 'receiving';
-    (src[cat] || []).forEach((p, i) => {
-      const el = document.getElementById(`av-${currentSeason}-${short}-${i}`);
-      if (el) tryLoadHeadshot(p.name, el);
-    });
-  });
 }
 
 function showTab(tab, btn) {
@@ -266,16 +281,14 @@ function showTab(tab, btn) {
 
 function setSeasonMode(mode, btn) {
   currentSeason = mode;
-  document.querySelectorAll('.toggle-btn').forEach(b => {
-    b.classList.remove('active','playoff');
-  });
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active','playoff'));
   btn.classList.add('active');
   if (mode === 'playoffs') btn.classList.add('playoff');
   const sub = document.getElementById('hero-sub');
   if (mode === 'regular') {
     sub.textContent = `Regular season stats · 2025 NFL season · Through week ${allData.regular_season_week}`;
   } else {
-    sub.textContent = allData.has_playoffs ? `Playoff stats · 2025 NFL postseason` : `Playoff stats · 2025 NFL postseason (not yet available)`;
+    sub.textContent = allData.has_playoffs ? `Playoff stats · 2025 NFL postseason` : `Playoff stats · not yet available`;
   }
   renderBoards();
 }
@@ -285,18 +298,10 @@ function openModal(pJson, category, rank) {
   currentModalPlayer = p;
   currentModalCategory = category;
   currentModalRank = rank;
-
   const posMap = { passing: 'QB', rushing: 'RB', receiving: 'WR/TE' };
   document.getElementById('modal-name').textContent = p.name;
   document.getElementById('modal-meta').textContent = `${p.team} · ${posMap[category]} · 2025 Season`;
-
-  const [bg, fg] = avatarColors[rank];
-  const hs = document.getElementById('modal-headshot');
-  hs.style.background = bg;
-  hs.style.color = fg;
-  hs.innerHTML = `<span>${initials(p.name)}</span>`;
-  tryLoadHeadshot(p.name, hs);
-
+  loadModalHeadshot(p, document.getElementById('modal-headshot-wrap'));
   setModalMode(currentSeason);
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -306,24 +311,17 @@ function setModalMode(mode) {
   document.getElementById('modal-reg-btn').classList.toggle('active', mode === 'regular');
   document.getElementById('modal-post-btn').classList.toggle('active', mode === 'playoffs');
   document.getElementById('modal-post-btn').classList.toggle('playoff', mode === 'playoffs');
-
   if (!currentModalPlayer || !currentModalCategory) return;
-
   const src = mode === 'regular' ? allData.regular : allData.playoffs;
   const cat = currentModalCategory === 'passing' ? 'passers' : currentModalCategory === 'rushing' ? 'rushers' : 'receivers';
-  const playerInMode = src[cat].find(p => p.name === currentModalPlayer.name);
-
+  const playerInMode = (src[cat] || []).find(p => p.name === currentModalPlayer.name);
   const body = document.getElementById('modal-body');
-
   if (!playerInMode) {
-    body.innerHTML = `<div class="no-playoff-msg">No ${mode === 'playoffs' ? 'playoff' : 'regular season'} stats available for ${currentModalPlayer.name}.</div>`;
+    body.innerHTML = `<div class="no-playoff-msg">No ${mode === 'playoffs' ? 'playoff' : 'regular season'} stats for ${currentModalPlayer.name}.</div>`;
     return;
   }
-
   const p = playerInMode;
-  let statsHtml = '';
-  let extraHtml = '';
-
+  let statsHtml = '', extraHtml = '';
   if (currentModalCategory === 'passing') {
     statsHtml = `
       <div class="stat-box"><div class="stat-box-val">${p.yards.toLocaleString()}</div><div class="stat-box-lbl">Pass Yards</div></div>
@@ -332,7 +330,7 @@ function setModalMode(mode) {
     const pct = p.attempts > 0 ? ((p.completions / p.attempts) * 100).toFixed(1) : '0.0';
     extraHtml = `<div class="stat-grid-2" style="margin-top:8px">
       <div class="stat-box"><div class="stat-box-val">${pct}%</div><div class="stat-box-lbl">Completion %</div></div>
-      <div class="stat-box"><div class="stat-box-val">${p.attempts > 0 ? (p.yards / p.attempts).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Attempt</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.attempts > 0 ? (p.yards/p.attempts).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Attempt</div></div>
     </div>`;
   } else if (currentModalCategory === 'rushing') {
     statsHtml = `
@@ -340,7 +338,7 @@ function setModalMode(mode) {
       <div class="stat-box"><div class="stat-box-val">${p.tds}</div><div class="stat-box-lbl">Touchdowns</div></div>
       <div class="stat-box"><div class="stat-box-val">${p.carries}</div><div class="stat-box-lbl">Carries</div></div>`;
     extraHtml = `<div class="stat-grid-2" style="margin-top:8px">
-      <div class="stat-box"><div class="stat-box-val">${p.carries > 0 ? (p.yards / p.carries).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Carry</div></div>
+      <div class="stat-box"><div class="stat-box-val">${p.carries > 0 ? (p.yards/p.carries).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Carry</div></div>
       <div class="stat-box"><div class="stat-box-val">${p.team}</div><div class="stat-box-lbl">Team</div></div>
     </div>`;
   } else {
@@ -353,8 +351,7 @@ function setModalMode(mode) {
       <div class="stat-box"><div class="stat-box-val">${p.receptions > 0 ? (p.yards/p.receptions).toFixed(1) : '0.0'}</div><div class="stat-box-lbl">Yards/Rec</div></div>
     </div>`;
   }
-
-  const rankIdx = src[cat].findIndex(x => x.name === p.name);
+  const rankIdx = (src[cat] || []).findIndex(x => x.name === p.name);
   body.innerHTML = `
     <div class="stat-grid">${statsHtml}</div>
     ${extraHtml}
@@ -376,11 +373,9 @@ async function loadData() {
     const res = await fetch('data.json');
     if (!res.ok) throw new Error('No data.json');
     allData = await res.json();
-
     document.getElementById('season-badge').textContent = `${allData.season} Season`;
     document.getElementById('hero-sub').textContent = `Regular season stats · 2025 NFL season · Through week ${allData.regular_season_week}`;
     document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', {month:'long', year:'numeric'});
-
     renderBoards();
   } catch(e) {
     ['passing-rows','rushing-rows','receiving-rows'].forEach(id => {
